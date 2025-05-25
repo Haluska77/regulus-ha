@@ -1,0 +1,9 @@
+{
+  "domain": "regulus",
+  "name": "Regulus Heat Pump",
+  "version": "1.0.0",
+  "config_flow": true,
+  "requirements": [],
+  "codeowners": ["@Haluska77"],
+  "iot_class": "local_polling"
+}
