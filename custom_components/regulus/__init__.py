@@ -1,9 +1,11 @@
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from custom_components.regulus.api.dashboard.dashboard_api import DashboardApi
 from .const import DOMAIN
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data.setdefault(DOMAIN, {})
+    hass.data[DOMAIN]["api"] = DashboardApi()
     hass.data[DOMAIN][entry.entry_id] = {
         "ip_address": entry.data["ip_address"],
         "username": entry.data["username"],
