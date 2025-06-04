@@ -1,33 +1,34 @@
 import requests
 from typing import Dict
 from .session_factory import SessionFactory
-from ..config.config import HOST, USER, PASSWORD
 from .xml_parser_service import parse_acer_value
 # from ..exception.unauthorized_error import UnAuthorizedError
 # from ..exception.illegal_status_error import IllegalStatusError
 
 
 class LoginService:
-    URL = f"{HOST}/login.xml"
 
-    def __init__(self):
+    def __init__(self, config: dict):
+        self.url = f"{config['host']}/login.xml"
+        self.user = config["user"]
+        self.password = config["password"]
         self.session = SessionFactory.get_session()
 
     def get_login(self) -> requests.Response:
-        return self.session.get(self.URL)
+        return self.session.get(self.url)
 
     def post_login(self) -> requests.Response:
 
         login_data: Dict[str, str] = {
-            "USER": USER,
-            "PASS": PASSWORD,
+            "USER": self.user,
+            "PASS": self.password,
         }
 
         headers = {
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        return self.session.post(self.URL, data=login_data, headers=headers, allow_redirects=False)
+        return self.session.post(self.url, data=login_data, headers=headers, allow_redirects=False)
 
     def success_login(self, response: requests.Response) -> str:
         login_status = response.status_code

@@ -1,4 +1,9 @@
-HOST = hass.data[DOMAIN][entry.entry_id]["ip_address"]
-# HOST = "http://10.0.4.117"
-USER = hass.data[DOMAIN][entry.entry_id]["username"]
-PASSWORD = hass.data[DOMAIN][entry.entry_id]["password"]
+from typing import Dict
+
+def get_config(entry) -> Dict[str, str]:
+    return {
+        "host": entry.data["ip_address"],
+        "user": entry.data["username"],
+        "password": entry.data["password"],
+        "ir_version": entry.data["ir_version"],
+    }

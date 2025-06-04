@@ -4,24 +4,16 @@ from datetime import timedelta
 import logging
 
 from homeassistant.components.sensor import SensorEntity
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, CoordinatorEntity
-from homeassistant.helpers.typing import HomeAssistantType, ConfigType
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.config_entries import ConfigEntry
 
 from .const import DOMAIN
-from custom_components.regulus.api.dashboard.dashboard_api import DashboardApi
 
-
-DataUpdateCoordinator_LOGGER = logging.getLogger(__name__)
+_LOGGER = logging.getLogger(__name__)
 SCAN_INTERVAL = timedelta(seconds=5)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
-    data = hass.data[DOMAIN][entry.entry_id]
-    ip = data["ip_address"]
-    username = data["username"]
-    password = data["password"]
-
     dashboard_api = hass.data[DOMAIN]["api"]
 
     async def async_update_data():
@@ -36,24 +28,27 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     )
 
     await coordinator.async_config_entry_first_refresh()
+    # _LOGGER.debug("Coordinator data: %s", coordinator.data)
 
     entities = []
     for key, value in coordinator.data.items():
-        metadata = SENSOR_METADATA.get(key, {})
-        entities.append(DynamicSensor(coordinator, key, metadata))
+        # metadata = SENSOR_METADATA.get(key, {})
+        entities.append(DynamicSensor(coordinator, key))
 
     async_add_entities(entities)
 
 
 class DynamicSensor(SensorEntity):
-    def __init__(self, coordinator, key: str, metadata: dict):
+    def __init__(self, coordinator, key: str, 
+                #  metadata: dict
+                 ):
         self._coordinator = coordinator
         self._key = key
-        self._metadata = metadata
+        # self._metadata = metadata
 
-    @property
-    def name(self):
-        return self._metadata.get("name", self._key.replace("_", " ").title())
+    # @property
+    # def name(self):
+    #     return self._metadata.get("name", self._key.replace("_", " ").title())
 
     @property
     def unique_id(self):
@@ -66,13 +61,13 @@ class DynamicSensor(SensorEntity):
         except (TypeError, ValueError):
             return self._coordinator.data.get(self._key)
 
-    @property
-    def native_unit_of_measurement(self):
-        return self._metadata.get("unit")
+    # @property
+    # def native_unit_of_measurement(self):
+    #     return self._metadata.get("unit")
 
-    @property
-    def device_class(self):
-        return self._metadata.get("device_class")
+    # @property
+    # def device_class(self):
+    #     return self._metadata.get("device_class")
 
     @property
     def should_poll(self):
