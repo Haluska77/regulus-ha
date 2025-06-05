@@ -2,47 +2,11 @@ from pydantic import BaseModel
 from typing import Optional
 from ...schema import SensorSchema
 
-
-# class ZoneSchema(BaseModel):
-#     status: Optional[bool]
-#     actualTemperature: Optional[str]
-#     requiredTemperature: Optional[str]
-#     actualHeatingWaterTemperature: Optional[str]
-#     requiredHeatingWaterTemperature: Optional[str]
-
-
-# class HeatPumpSchema(BaseModel):
-#     runningStatus: Optional[bool]
-#     outletTemperature: Optional[str]
-#     inletTemperature: Optional[str]
-
-
-# class AkuSchema(BaseModel):
-#     status: Optional[bool]
-#     topTemperature: Optional[str]
-#     bottomTemperature: Optional[str]
-#     requiredTemperature: Optional[str]
-
-
-# class WaterSchema(BaseModel):
-#     status: Optional[bool]
-#     actualTemperature: Optional[str]
-#     requiredTemperature: Optional[str]
-
-
-# class SolarSchema(BaseModel):
-#     status: Optional[bool]
-#     panelTemperature: Optional[str]
-
-
-# class CirculationSchema(BaseModel):
-#     status: Optional[bool]
-
 class DashboardResponseSchema(BaseModel):
     outdoorTemperature: SensorSchema
     # rcTariff: Optional[str]
     # holiday: Optional[str]
-    # heatPumpRunningStatus: Optional[bool]
+    heatPumpRunningStatus: SensorSchema
     # heatPumpOutletTemperature: Optional[str]
     # heatPumpInletTemperature: Optional[str]
     # zone1Status: Optional[bool]

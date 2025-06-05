@@ -1,4 +1,5 @@
 from typing import Dict, List
+from homeassistant.const import Platform
 
 from custom_components.regulus.schema import sensor
 from .dashboard_schemas import DashboardResponseSchema
@@ -12,11 +13,14 @@ class DashboardApi(AbstractApi[DashboardResponseSchema]):
         print("Successfully fetched `/dashboard` data")
 
         return DashboardResponseSchema(
-            outdoorTemperature = sensor("Outdoor temperature", get_value_from_map(schema_xml_map, "outdoorTemperature", registry_errors), 
-                                      "°C", "temperature", "mdi:thermometer"),
+            outdoorTemperature = sensor("Outdoor temperature", 
+                                        get_value_from_map(schema_xml_map, "outdoorTemperature", registry_errors), 
+                                      "°C", "temperature", "mdi:thermometer", Platform.SENSOR),
             # rcTariff="LOW" if get_value_from_map(schema_xml_map, "rcTariff", registry_errors) == "1" else "HIGH",
             # holiday="ON" if get_value_from_map(schema_xml_map, "holiday", registry_errors) == "1" else "OFF",
-            # heatPumpRunningStatus=get_value_from_map(schema_xml_map, "heatPumpRunningStatus", registry_errors) != "0",
+            heatPumpRunningStatus= sensor("Heat Pump Running Status", 
+                                          get_value_from_map(schema_xml_map, "heatPumpRunningStatus", registry_errors) != "0",
+                                          "", "running", "mdi:fan", Platform.BINARY_SENSOR),
             # heatPumpOutletTemperature=get_value_from_map(schema_xml_map, "heatPumpOutletTemperature", registry_errors),
             # heatPumpInletTemperature=get_value_from_map(schema_xml_map, "heatPumpInletTemperature", registry_errors),
             # zone1Status=get_value_from_map(schema_xml_map, "zone1RunningStatus", registry_errors) != "0",
