@@ -13,9 +13,9 @@ class HeatPumpConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema({
-                vol.Required("ip_address", default="http://10.0.4.117"): str,
-                vol.Required("username", default="uzivatel"): str,
-                vol.Required("password", default="uzivatel"): str,
+                vol.Required("ip_address", default=""): str,
+                vol.Required("username", default=""): str,
+                vol.Required("password", default=""): str,
                 vol.Required("ir_version", default=IR_VERSION_OPTIONS[1]): vol.In(IR_VERSION_OPTIONS)
             }),
         )
