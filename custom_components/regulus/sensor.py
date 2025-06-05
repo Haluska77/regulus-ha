@@ -1,8 +1,7 @@
-from __future__ import annotations
-
 from datetime import timedelta
 import logging
 
+from .schema import SensorSchema
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.config_entries import ConfigEntry
@@ -32,42 +31,36 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 
     entities = []
     for key, value in coordinator.data.items():
-        # metadata = SENSOR_METADATA.get(key, {})
-        entities.append(DynamicSensor(coordinator, key))
+        entities.append(DynamicSensor(coordinator, key, value))
 
     async_add_entities(entities)
 
 
 class DynamicSensor(SensorEntity):
-    def __init__(self, coordinator, key: str, 
-                #  metadata: dict
-                 ):
+    def __init__(self, coordinator, key: str, value: SensorSchema):
         self._coordinator = coordinator
         self._key = key
-        # self._metadata = metadata
-
-    # @property
-    # def name(self):
-    #     return self._metadata.get("name", self._key.replace("_", " ").title())
+        self.value = value
 
     @property
-    def unique_id(self):
-        return f"dashboard_{self._key}"
+    def name(self):
+        return self.value.get("name")
 
     @property
-    def native_value(self):
-        try:
-            return float(self._coordinator.data.get(self._key))
-        except (TypeError, ValueError):
-            return self._coordinator.data.get(self._key)
+    def state(self):
+        return self._coordinator.data[self._key].get("value")
 
-    # @property
-    # def native_unit_of_measurement(self):
-    #     return self._metadata.get("unit")
+    @property
+    def native_unit_of_measurement(self):
+        return self.value.get("unit")
 
-    # @property
-    # def device_class(self):
-    #     return self._metadata.get("device_class")
+    @property
+    def device_class(self):
+        return self.value.get("deviceClass")
+
+    @property
+    def icon(self):
+        return self.value.get("icon")
 
     @property
     def should_poll(self):
