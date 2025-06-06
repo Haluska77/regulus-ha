@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
-from typing import Dict, List, Optional, Union
-from ..mapper.registry_mapper import registry_mapper
 
+from typing import Dict, List, Optional
+from importlib import import_module
 
 def parse_xml_to_map(xml: str) -> Dict[str, str]:
     return parse_xml(get_registry_map, xml)
@@ -53,8 +53,9 @@ def get_value_from_map(
     response_map: Dict[str, str],
     registry_key: str,
     registry_errors: List[str],
+    ir_version: int
 ) -> Optional[str]:
-    registry_name = registry_mapper.get(registry_key)
+    registry_name = load_registry_mapper(ir_version).get(registry_key)
     if registry_name is None:
         msg = (
             f"Application mapping is invalid. Property '{registry_key}' is not assigned "
@@ -78,3 +79,17 @@ def get_value_from_map(
         return None
 
     return registry_value
+
+def load_registry_mapper(ir_version: int) -> dict:
+
+    version_map = {
+        12: "custom_components.regulus.mapper.registry_mapper_ir12",
+        14: "custom_components.regulus.mapper.registry_mapper_ir14",
+    }
+
+    module_name = version_map.get(int(ir_version))
+    if not module_name:
+        raise ValueError(f"Unsupported ir_version: {ir_version}")
+
+    module = import_module(module_name)
+    return module.REGISTRY_MAPPER

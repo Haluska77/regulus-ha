@@ -11,15 +11,16 @@ class DashboardApi(AbstractApi[DashboardResponseSchema]):
 
     def generate_response(self, schema_xml_map: Dict[str, str], registry_errors: List[str]) -> DashboardResponseSchema:
         print("Successfully fetched `/dashboard` data")
+        version = self.config["ir_version"]
 
         return DashboardResponseSchema(
             outdoorTemperature = sensor("Outdoor temperature", 
-                                        get_value_from_map(schema_xml_map, "outdoorTemperature", registry_errors), 
+                                        get_value_from_map(schema_xml_map, "outdoorTemperature", registry_errors, version), 
                                       "°C", "temperature", "mdi:thermometer", Platform.SENSOR),
             # rcTariff="LOW" if get_value_from_map(schema_xml_map, "rcTariff", registry_errors) == "1" else "HIGH",
             # holiday="ON" if get_value_from_map(schema_xml_map, "holiday", registry_errors) == "1" else "OFF",
             heatPumpRunningStatus= sensor("Heat Pump Running Status", 
-                                          get_value_from_map(schema_xml_map, "heatPumpRunningStatus", registry_errors) != "0",
+                                          get_value_from_map(schema_xml_map, "heatPumpRunningStatus", registry_errors, version) != "0",
                                           "", "running", "mdi:fan", Platform.BINARY_SENSOR),
             # heatPumpOutletTemperature=get_value_from_map(schema_xml_map, "heatPumpOutletTemperature", registry_errors),
             # heatPumpInletTemperature=get_value_from_map(schema_xml_map, "heatPumpInletTemperature", registry_errors),
@@ -40,7 +41,11 @@ class DashboardApi(AbstractApi[DashboardResponseSchema]):
             # waterStatus=get_value_from_map(schema_xml_map, "waterRunningStatusFromHeatPump", registry_errors) == "1",
             # waterActualTemperature=get_value_from_map(schema_xml_map, "waterSwitchingSensorTemperature", registry_errors),
             # waterRequiredTemperature=get_value_from_map(schema_xml_map, "waterRequiredTemperature", registry_errors),
-            # solarStatus=get_value_from_map(schema_xml_map, "solarRunningStatus", registry_errors) == "1",
-            # solarPanelTemperature=get_value_from_map(schema_xml_map, "solarPanelTemperature", registry_errors),
+            solarStatus=sensor("Solar Status", 
+                                        get_value_from_map(schema_xml_map, "solarRunningStatus", registry_errors, version) == "1", 
+                                      "", "running", "mdi:solar-panel", Platform.BINARY_SENSOR),
+            solarPanelTemperature=sensor("Solar Panel temperature", 
+                                        get_value_from_map(schema_xml_map, "solarPanelTemperature", registry_errors, version), 
+                                      "°C", "temperature", "mdi:thermometer", Platform.SENSOR),
             # circulationStatus=get_value_from_map(schema_xml_map, "circulationRunningStatus", registry_errors) == "1"
         )

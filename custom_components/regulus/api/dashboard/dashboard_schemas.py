@@ -26,7 +26,7 @@ class DashboardResponseSchema(BaseModel):
     # waterStatus: Optional[bool]
     # waterActualTemperature: Optional[str]
     # waterRequiredTemperature: Optional[str]
-    # solarStatus: Optional[bool]
-    # solarPanelTemperature: Optional[str]
+    solarStatus: SensorSchema
+    solarPanelTemperature: SensorSchema
     # circulationStatus: Optional[bool]
 

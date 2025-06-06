@@ -24,34 +24,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 
 
 class DynamicSensor(BinarySensorEntity):
-    def __init__(self, coordinator, key: str, value: SensorSchema):
+    def __init__(self, coordinator, key: str, sensor_data: SensorSchema):
         self._coordinator = coordinator
         self._key = key
-        self.value = value
+        self._attr_unique_id = f"{DOMAIN}_{key}"        
+        self._attr_name = sensor_data["name"]
+        self._attr_native_unit_of_measurement = sensor_data.get("unit")
+        self._attr_device_class = sensor_data.get("deviceClass")
+        self._attr_icon = sensor_data.get("icon")
 
     @property
-    def unique_id(self):
-        return f"{self._key}_binary_sensor"
-
-    @property
-    def name(self):
-        return self.value.get("name")
-
-    @property
-    def state(self):
-        return self._coordinator.data[self._key].get("value")
-
-    @property
-    def native_unit_of_measurement(self):
-        return self.value.get("unit")
-
-    @property
-    def device_class(self):
-        return self.value.get("deviceClass")
-
-    @property
-    def icon(self):
-        return self.value.get("icon")
+    def is_on(self):
+        return self._coordinator.data[self._key]["value"]
 
     @property
     def should_poll(self):

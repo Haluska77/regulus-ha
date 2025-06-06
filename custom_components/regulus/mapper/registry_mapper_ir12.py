@@ -1,4 +1,4 @@
-registry_mapper = {
+REGISTRY_MAPPER = {
   "outdoorTemperature": "__R8267_REAL_.1f",
   "rcTariff": "__R10949.2_BOOL_i", #0 =high, 1 = low
   "holiday": "__R8266.1_BOOL_i", #0 = off, 1 = on
