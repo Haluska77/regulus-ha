@@ -1,6 +1,7 @@
 from homeassistant import config_entries
 import voluptuous as vol
 from .const import DOMAIN
+from .config import DEFAULT_HOST, DEFAULT_USER, DEFAULT_PASSWORD
 
 IR_VERSION_OPTIONS = ["12", "14"]
 
@@ -13,9 +14,9 @@ class HeatPumpConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema({
-                vol.Required("ip_address", default=""): str,
-                vol.Required("username", default=""): str,
-                vol.Required("password", default=""): str,
+                vol.Required("ip_address", default=DEFAULT_HOST): str,
+                vol.Required("username", default=DEFAULT_USER): str,
+                vol.Required("password", default=DEFAULT_PASSWORD): str,
                 vol.Required("ir_version", default=IR_VERSION_OPTIONS[1]): vol.In(IR_VERSION_OPTIONS)
             }),
         )
