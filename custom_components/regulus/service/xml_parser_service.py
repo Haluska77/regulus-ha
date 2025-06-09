@@ -2,6 +2,8 @@ import xml.etree.ElementTree as ET
 
 from typing import Dict, List, Optional
 from importlib import import_module
+from homeassistant.exceptions import ConfigEntryNotReady
+
 
 def parse_xml_to_map(xml: str) -> Dict[str, str]:
     return parse_xml(get_registry_map, xml)
@@ -50,10 +52,7 @@ def parse_xml(operation, xml: str):
 
 
 def get_value_from_map(
-    response_map: Dict[str, str],
-    registry_key: str,
-    registry_errors: List[str],
-    ir_version: int
+    response_map: Dict[str, str], registry_key: str, registry_errors: List[str], ir_version: int
 ) -> Optional[str]:
     registry_name = load_registry_mapper(ir_version).get(registry_key)
     if registry_name is None:
@@ -62,8 +61,7 @@ def get_value_from_map(
             f"to any Regulus Registry name."
         )
         registry_errors.append(msg)
-        print(msg)
-        return None
+        raise ConfigEntryNotReady(msg)
 
     registry_value = response_map.get(registry_name)
     if registry_value is None:
@@ -87,7 +85,7 @@ def load_registry_mapper(ir_version: int) -> dict:
         14: "custom_components.regulus.mapper.registry_mapper_ir14",
     }
 
-    module_name = version_map.get(int(ir_version))
+    module_name = version_map.get(ir_version)
     if not module_name:
         raise ValueError(f"Unsupported ir_version: {ir_version}")
 

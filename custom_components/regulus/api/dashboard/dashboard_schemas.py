@@ -4,29 +4,29 @@ from ...schema import SensorSchema
 
 class DashboardResponseSchema(BaseModel):
     outdoorTemperature: SensorSchema
-    # rcTariff: Optional[str]
-    # holiday: Optional[str]
+    rcTariff: SensorSchema
+    holiday: SensorSchema
     heatPumpRunningStatus: SensorSchema
-    # heatPumpOutletTemperature: Optional[str]
-    # heatPumpInletTemperature: Optional[str]
-    # zone1Status: Optional[bool]
-    # zone1ActualTemperature: Optional[str]
-    # zone1RequiredTemperature: Optional[str]
-    # zone1ActualHeatingWaterTemperature: Optional[str]
-    # zone1RequiredHeatingWaterTemperature: Optional[str]
-    # zone2Status: Optional[bool]
-    # zone2ActualTemperature: Optional[str]
-    # zone2RequiredTemperature: Optional[str]
-    # zone2ActualHeatingWaterTemperature: Optional[str]
-    # zone2RequiredHeatingWaterTemperature: Optional[str]
-    # akuStatus: Optional[bool]
-    # akuTopTemperature: Optional[str]
-    # akuBottomTemperature: Optional[str]
-    # akuRequiredTemperature: Optional[str]
-    # waterStatus: Optional[bool]
-    # waterActualTemperature: Optional[str]
-    # waterRequiredTemperature: Optional[str]
+    heatPumpOutletTemperature: SensorSchema
+    heatPumpInletTemperature: SensorSchema
+    zone1Status: SensorSchema
+    zone1ActualTemperature: SensorSchema
+    zone1RequiredTemperature: SensorSchema
+    zone1ActualHeatingWaterTemperature: SensorSchema
+    zone1RequiredHeatingWaterTemperature: SensorSchema
+    zone2Status: SensorSchema
+    zone2ActualTemperature: SensorSchema
+    zone2RequiredTemperature: SensorSchema
+    zone2ActualHeatingWaterTemperature: SensorSchema
+    zone2RequiredHeatingWaterTemperature: SensorSchema
+    akuStatus: SensorSchema
+    akuTopTemperature: SensorSchema
+    akuBottomTemperature: SensorSchema
+    akuRequiredTemperature: SensorSchema
+    waterStatus: SensorSchema
+    waterActualTemperature: SensorSchema
+    waterRequiredTemperature: SensorSchema
     solarStatus: SensorSchema
     solarPanelTemperature: SensorSchema
-    # circulationStatus: Optional[bool]
+    circulationStatus: SensorSchema
 

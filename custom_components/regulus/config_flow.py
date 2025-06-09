@@ -3,7 +3,7 @@ import voluptuous as vol
 from .const import DOMAIN
 from .config import DEFAULT_HOST, DEFAULT_USER, DEFAULT_PASSWORD
 
-IR_VERSION_OPTIONS = ["12", "14"]
+IR_VERSION_OPTIONS = [12, 14]
 
 class HeatPumpConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 

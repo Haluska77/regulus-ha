@@ -30,9 +30,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     hass.data[DOMAIN][entry.entry_id] = {"dashboard_coordinator": dashboard_coordinator}
 
-    # hass.data[DOMAIN]["api"] = dashboard_api
-    # hass.data[DOMAIN][entry.entry_id] = config
-
     await hass.config_entries.async_forward_entry_setups(entry, [Platform.SENSOR, Platform.BINARY_SENSOR])
     
     return True
