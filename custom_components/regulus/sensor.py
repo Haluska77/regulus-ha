@@ -12,11 +12,16 @@ SCAN_INTERVAL = timedelta(seconds=5)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
     dashboard_coordinator = hass.data[DOMAIN][entry.entry_id]["dashboard_coordinator"]
+    heatpump_coordinator = hass.data[DOMAIN][entry.entry_id]["heatpump_coordinator"]
 
     entities = []
-    for key, value in dashboard_coordinator.data.items():
-        if value["platform"] == Platform.SENSOR:
-            entities.append(DynamicSensor(dashboard_coordinator, key, value))
+
+    coordinators = [dashboard_coordinator, heatpump_coordinator]
+
+    for coordinator in coordinators:
+        for key, value in coordinator.data.items():
+            if value["platform"] == Platform.SENSOR:
+                entities.append(DynamicSensor(coordinator, key, value))
 
     async_add_entities(entities)
 
