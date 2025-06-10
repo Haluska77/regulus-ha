@@ -7,6 +7,7 @@ from homeassistant.const import Platform
 from .coordinator import RegulusUpdateCoordinator
 from .api.dashboard.dashboard_api import DashboardApi
 from .api.heatPump.heatPump_api import HeatPumpApi
+from .api.home.home_api import HomeApi
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
@@ -27,17 +28,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     dashboard_coordinator = RegulusUpdateCoordinator(hass, "dashboard", dashboard_api)
     await dashboard_coordinator.async_config_entry_first_refresh()
-    _LOGGER.debug("Coordinator data: %s", dashboard_coordinator.data)
+    _LOGGER.debug("Dashboard Coordinator data: %s", dashboard_coordinator.data)
 
     heatPump_api = HeatPumpApi(config)
     await hass.async_add_executor_job(heatPump_api.route_fetch)
     heatpump_coordinator = RegulusUpdateCoordinator(hass, "heatPump", heatPump_api)
     await heatpump_coordinator.async_config_entry_first_refresh()
-    _LOGGER.debug("Coordinator data: %s", heatpump_coordinator.data)
+    _LOGGER.debug("HeatPump Coordinator data: %s", heatpump_coordinator.data)
+
+    home_api = HomeApi(config)
+    await hass.async_add_executor_job(home_api.route_fetch)
+    home_coordinator = RegulusUpdateCoordinator(hass, "home", home_api)
+    await home_coordinator.async_config_entry_first_refresh()
+    _LOGGER.debug("Home Coordinator data: %s", home_coordinator.data)
 
     hass.data[DOMAIN][entry.entry_id] = {
         "dashboard_coordinator": dashboard_coordinator,
-        "heatpump_coordinator": heatpump_coordinator
+        "heatpump_coordinator": heatpump_coordinator,
+        "home_coordinator": home_coordinator,
         }
 
     await hass.config_entries.async_forward_entry_setups(entry, [Platform.SENSOR, Platform.BINARY_SENSOR])

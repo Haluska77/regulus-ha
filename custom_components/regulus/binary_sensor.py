@@ -1,5 +1,4 @@
 from datetime import timedelta
-import logging
 
 from homeassistant.core import HomeAssistant
 from homeassistant.components.binary_sensor import BinarySensorEntity
@@ -9,16 +8,20 @@ from homeassistant.const import Platform
 from .schema import SensorSchema
 from .const import DOMAIN
 
-_LOGGER = logging.getLogger(__name__)
 SCAN_INTERVAL = timedelta(seconds=5)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
     dashboard_coordinator = hass.data[DOMAIN][entry.entry_id]["dashboard_coordinator"]
+    home_coordinator = hass.data[DOMAIN][entry.entry_id]["home_coordinator"]
 
     entities = []
-    for key, value in dashboard_coordinator.data.items():
-        if value["platform"] == Platform.BINARY_SENSOR:
-            entities.append(DynamicSensor(dashboard_coordinator, key, value))
+
+    coordinators = [dashboard_coordinator, home_coordinator]
+
+    for coordinator in coordinators:
+        for key, value in coordinator.data.items():
+            if value["platform"] == Platform.BINARY_SENSOR:
+                entities.append(DynamicSensor(coordinator, key, value))
 
     async_add_entities(entities)
 

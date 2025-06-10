@@ -14,6 +14,7 @@ class AbstractApi(Generic[T], ABC):
         self.config = config      
         self.session = SessionFactory.get_session()
         self.host = config["host"]
+        self.url = f"http://{self.host}"
 
     def route_fetch(self):
         try:
@@ -24,7 +25,7 @@ class AbstractApi(Generic[T], ABC):
             return {"error": f"Unhandled error: {str(error)}"}
 
     def fetch(self) -> Any:
-        api_url = f"{self.host}{self.page}"
+        api_url = f"{self.url}{self.page}"
         return self.execute(lambda: self.session.get(api_url, allow_redirects=False))
 
     def execute(self, operation) -> Any:
