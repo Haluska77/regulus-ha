@@ -7,7 +7,7 @@ from ...service.abstract_api import AbstractApi
 from ...service.xml_parser_service import get_value_from_map
 
 class HomeApi(AbstractApi[HomeResponseSchema]):
-    page = "/1_sch.xml"
+    page = "/home.xml"
 
     def generate_response(self, schema_xml_map: Dict[str, str], registry_errors: List[str]) -> HomeResponseSchema:
         print("Successfully fetched `/home` data")

@@ -9,7 +9,7 @@ from .xml_parser_service import parse_acer_value
 class LoginService:
 
     def __init__(self, config: dict):
-        self.url = f"{config['host']}/login.xml"
+        self.url = f"http://{config["host"]}/login.xml"
         self.user = config["user"]
         self.password = config["password"]
         self.session = SessionFactory.get_session()
