@@ -6,7 +6,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 
 from .schema import SensorSchema
-from .const import DOMAIN
+from .const import DOMAIN, NAME, COMPANY
 
 SCAN_INTERVAL = timedelta(seconds=5)
 
@@ -21,13 +21,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     for coordinator in coordinators:
         for key, value in coordinator.data.items():
             if value["platform"] == Platform.SENSOR:
-                entities.append(DynamicSensor(coordinator, key, value))
+                entities.append(DynamicSensor(coordinator, entry, key, value))
 
     async_add_entities(entities)
 
 
 class DynamicSensor(SensorEntity):
-    def __init__(self, coordinator, key: str, sensor_data: SensorSchema):
+    def __init__(self, coordinator, configEntry: ConfigEntry, key: str, sensor_data: SensorSchema):
         self._coordinator = coordinator
         self._key = key
         self._attr_unique_id = f"{DOMAIN}_{key}"        
@@ -35,6 +35,13 @@ class DynamicSensor(SensorEntity):
         self._attr_native_unit_of_measurement = sensor_data.get("unit")
         self._attr_device_class = sensor_data.get("deviceClass")
         self._attr_icon = sensor_data.get("icon")
+        self._attr_device_info = {
+            "identifiers": {(DOMAIN, configEntry.entry_id)},
+            "name": NAME,
+            "manufacturer": COMPANY,
+            "model": "all models",
+            "entry_type": "service",
+        }
 
     @property
     def native_value(self):

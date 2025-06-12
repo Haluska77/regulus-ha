@@ -21,9 +21,9 @@ class HeatPumpConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             }),
         )
     
-@staticmethod
-def async_get_options_flow(config_entry):
-    return HeatPumpOptionsFlow(config_entry)
+    @staticmethod
+    def async_get_options_flow(config_entry):
+        return HeatPumpOptionsFlow(config_entry)
 
 class HeatPumpOptionsFlow(config_entries.OptionsFlow):
     def __init__(self, config_entry):
