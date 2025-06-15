@@ -1,10 +1,11 @@
 {
   "domain": "regulus",
   "name": "Regulus Heat Pump",
-  "version": "1.0.0",
-  "documentation": "https://github.com/Haluska77/regulus-ha",
-  "issue_tracker": "https://github.com/Haluska77/regulus-ha/issues",
-  "config_flow": true,
   "codeowners": ["@Haluska77"],
-  "iot_class": "local_polling"
+  "config_flow": true,
+  "documentation": "https://github.com/Haluska77/regulus-ha",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Haluska77/regulus-ha/issues",
+  "requirements": [],
+  "version": "1.0.0"
 }
