@@ -4,5 +4,6 @@
   "documentation": "https://github.com/Haluska77/regulus-ha",
   "codeowners": ["@Haluska77"],
   "requirements": [],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "category": "integration"
 }
