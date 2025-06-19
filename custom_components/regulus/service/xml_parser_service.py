@@ -1,10 +1,11 @@
-import xml.etree.ElementTree as ET
-
-from typing import Dict, List, Optional
+from pydantic import BaseModel
+from typing import Dict, List, Optional, Union, Callable
 from importlib import import_module
-from homeassistant.exceptions import ConfigEntryNotReady
 
-
+class RegistryResult(BaseModel):
+    value: Optional[Union[str, bool, int]]
+    error: Optional[str]
+    
 def parse_xml_to_map(xml: str) -> Dict[str, str]:
     return parse_xml(get_registry_map, xml)
 
@@ -52,31 +53,27 @@ def parse_xml(operation, xml: str):
 
 
 def get_value_from_map(
-    response_map: Dict[str, str], registry_key: str, registry_errors: List[str], ir_version: int
-) -> Optional[str]:
-    registry_name = load_registry_mapper(ir_version).get(registry_key)
+    response_map: Dict[str, str], sensor_name: str, ir_version: int, converter: Optional[Callable[[str], Union[str, bool, int]]] = None
+) -> RegistryResult:
+    registry_name = load_registry_mapper(ir_version).get(sensor_name)
     if registry_name is None:
         msg = (
-            f"Application mapping is invalid. Property '{registry_key}' is not assigned "
+            f"Application mapping is invalid. Sensor '{sensor_name}' is not assigned "
             f"to any Regulus Registry name."
         )
-        registry_errors.append(msg)
-        raise ConfigEntryNotReady(msg)
+        return RegistryResult(value=None, error=msg)
 
     registry_value = response_map.get(registry_name)
+
     if registry_value is None:
         msg = (
-            f"'{registry_key}' could not be found. '{registry_name}' is missing in xml response or "
-            f"'{registry_key}' is mapped to another registry. Please contact Regulus provider."
-        )
-        registry_errors.append(msg)
-        print(
-            f"Property '{registry_key}' is assigned to registry '{registry_name}', "
+            f"Property '{sensor_name}' is assigned to registry '{registry_name}', "
             f"but is not found in response xml"
         )
-        return None
+        return RegistryResult(value=None, error=msg)
 
-    return registry_value
+    converted_value = converter(registry_value) if converter else registry_value
+    return RegistryResult(value=converted_value, error=None)
 
 def load_registry_mapper(ir_version: int) -> dict:
 

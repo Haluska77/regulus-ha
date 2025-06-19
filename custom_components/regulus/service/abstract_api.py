@@ -19,8 +19,6 @@ class AbstractApi(Generic[T], ABC):
     def route_fetch(self):
         try:
             return self.fetch()
-        except ConflictError as error:
-            return {"error": str(error)}
         except Exception as error:
             return {"error": f"Unhandled error: {str(error)}"}
 
@@ -44,13 +42,10 @@ class AbstractApi(Generic[T], ABC):
         schema_xml_map = parse_xml_to_map(data)
         registry_errors = []
 
-        response = self.generate_response(schema_xml_map, registry_errors)
-
-        if registry_errors:
-            raise ConflictError("|".join(registry_errors))
+        response = self.generate_response(schema_xml_map)
 
         return response.dict()
 
     @abstractmethod
-    def generate_response(self, schema_xml_map: Dict[str, str], registry_errors: list) -> Any:
+    def generate_response(self, schema_xml_map: Dict[str, str]) -> Any:
         pass

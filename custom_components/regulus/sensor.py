@@ -45,7 +45,14 @@ class DynamicSensor(SensorEntity):
 
     @property
     def native_value(self):
-        return self._coordinator.data[self._key]["value"]
+        return self._coordinator.data[self._key]["value"]["value"]
+
+    @property
+    def extra_state_attributes(self) -> dict:
+        attrs = {}
+        if self._coordinator.data[self._key]["value"]["error"]:
+            attrs["regulus_error"] = self._coordinator.data[self._key]["value"]["error"]
+        return attrs
 
     @property
     def should_poll(self):
