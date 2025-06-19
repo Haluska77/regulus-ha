@@ -28,7 +28,7 @@ class HeatPumpOptionsFlow(config_entries.OptionsFlow):
     async def async_step_init(self, user_input=None):
         config_entry = self.config_entry
         if user_input is not None:
-            return self.async_create_entry(title="Heat Pump", data=user_input)
+            return self.async_create_entry(title="", data=user_input)
 
         return self.async_show_form(
             step_id="init",
