@@ -4,6 +4,7 @@ from .session_factory import SessionFactory
 from .login_service import LoginService
 from .xml_parser_service import parse_xml_to_map
 from ..exception.conflict_error import ConflictError
+from importlib import import_module
 
 T = TypeVar('T')
 
@@ -40,12 +41,26 @@ class AbstractApi(Generic[T], ABC):
         if not data:
             raise ConflictError("No data received from the API")
         schema_xml_map = parse_xml_to_map(data)
-        registry_errors = []
 
-        response = self.generate_response(schema_xml_map)
+        registry_mapper = self.load_registry_mapper_by_version(self.config["ir_version"])
+        response = self.generate_response(schema_xml_map, registry_mapper)
 
         return response.dict()
 
+    def load_registry_mapper_by_version(self, ir_version: int) -> Dict[str, str]:
+
+        version_map = {
+            12: "custom_components.regulus.mapper.registry_mapper_ir12",
+            14: "custom_components.regulus.mapper.registry_mapper_ir14",
+        }
+
+        module_name = version_map.get(ir_version)
+        if not module_name:
+            raise ValueError(f"Unsupported ir_version: {ir_version}")
+
+        module = import_module(module_name)
+        return module.REGISTRY_MAPPER
+
     @abstractmethod
-    def generate_response(self, schema_xml_map: Dict[str, str]) -> Any:
+    def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> Any:
         pass

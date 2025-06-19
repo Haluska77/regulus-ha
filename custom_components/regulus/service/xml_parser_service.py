@@ -1,6 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, List, Optional, Union, Callable
-from importlib import import_module
+from typing import Dict, Optional, Union, Callable
 
 class RegistryResult(BaseModel):
     value: Optional[Union[str, bool, int]]
@@ -53,9 +52,9 @@ def parse_xml(operation, xml: str):
 
 
 def get_value_from_map(
-    response_map: Dict[str, str], sensor_name: str, ir_version: int, converter: Optional[Callable[[str], Union[str, bool, int]]] = None
+    response_map: Dict[str, str], sensor_name: str, registry_mapper: Dict[str, str], converter: Optional[Callable[[str], Union[str, bool, int]]] = None
 ) -> RegistryResult:
-    registry_name = load_registry_mapper(ir_version).get(sensor_name)
+    registry_name = registry_mapper.get(sensor_name)
     if registry_name is None:
         msg = (
             f"Application mapping is invalid. Sensor '{sensor_name}' is not assigned "
@@ -74,17 +73,3 @@ def get_value_from_map(
 
     converted_value = converter(registry_value) if converter else registry_value
     return RegistryResult(value=converted_value, error=None)
-
-def load_registry_mapper(ir_version: int) -> dict:
-
-    version_map = {
-        12: "custom_components.regulus.mapper.registry_mapper_ir12",
-        14: "custom_components.regulus.mapper.registry_mapper_ir14",
-    }
-
-    module_name = version_map.get(ir_version)
-    if not module_name:
-        raise ValueError(f"Unsupported ir_version: {ir_version}")
-
-    module = import_module(module_name)
-    return module.REGISTRY_MAPPER
