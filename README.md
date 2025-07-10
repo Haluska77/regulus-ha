@@ -1,5 +1,4 @@
 [![version](https://img.shields.io/github/manifest-json/v/Haluska77/regulus-ha?filename=custom_components%2Fregulus%2Fmanifest.json&label=version)](https://github.com/Haluska77/regulus-ha/releases/latest)
-[![releases](https://img.shields.io/github/downloads/Haluska77/regulus-ha/total)](https://github.com/Haluska77/regulus-ha/releases)
 [![HACS](https://img.shields.io/badge/HACS-Default-orange.svg)](https://hacs.xyz)
 
 # Regulus Heat Pump Integration
