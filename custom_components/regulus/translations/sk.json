@@ -1,0 +1,17 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Konfigurácia zariadenia",
+        "description": "Zadajte prosím údaje o pripojení.",
+        "data": {
+          "ip_address": "IP adresa",
+          "username": "Používateľské meno",
+          "password": "Heslo",
+          "ir_version": "IR verzia",
+          "polling_interval": "Interval načítania (v sekundách)"
+        }
+      }
+    }
+  }
+}

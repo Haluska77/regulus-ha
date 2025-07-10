@@ -9,7 +9,7 @@
           "username": "Username",
           "password": "Password",
           "ir_version": "IR Version",
-          "polling_interval": "Polling Interval"
+          "polling_interval": "Polling Interval (seconds)"
         }
       }
     }
