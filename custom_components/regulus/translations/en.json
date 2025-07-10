@@ -1,0 +1,17 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Device configuration",
+        "description": "Please enter the connection details.",
+        "data": {
+          "ip_address": "IP Address",
+          "username": "Username",
+          "password": "Password",
+          "ir_version": "IR Version",
+          "polling_interval": "Polling Interval"
+        }
+      }
+    }
+  }
+}
