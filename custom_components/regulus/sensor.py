@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from homeassistant.core import HomeAssistant
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.config_entries import ConfigEntry
@@ -7,8 +5,6 @@ from homeassistant.const import Platform
 
 from .schema import SensorSchema
 from .const import DOMAIN, NAME, COMPANY
-
-SCAN_INTERVAL = timedelta(seconds=5)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
     dashboard_coordinator = hass.data[DOMAIN][entry.entry_id]["dashboard_coordinator"]

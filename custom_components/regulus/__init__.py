@@ -3,6 +3,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.const import Platform
+from datetime import timedelta
 
 from .coordinator import RegulusUpdateCoordinator
 from .api.dashboard.dashboard_api import DashboardApi
