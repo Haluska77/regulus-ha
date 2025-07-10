@@ -21,6 +21,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "user": entry.options.get("username", entry.data["username"]),
         "password": entry.options.get("password", entry.data["password"]),
         "ir_version": entry.options.get("ir_version", entry.data["ir_version"]),
+        "polling_interval": timedelta(seconds=entry.options.get("polling_interval", entry.data["polling_interval"])),
     }
     try:
         dashboard_api = DashboardApi(config)
@@ -28,19 +29,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     except Exception as e:
         raise ConfigEntryNotReady(f"Could not connect to Regulus device: {e}")
 
-    dashboard_coordinator = RegulusUpdateCoordinator(hass, "dashboard", dashboard_api)
+    dashboard_coordinator = RegulusUpdateCoordinator(hass, "dashboard", dashboard_api, config["polling_interval"])
     await dashboard_coordinator.async_config_entry_first_refresh()
     _LOGGER.debug("Dashboard Coordinator data: %s", dashboard_coordinator.data)
 
     heatPump_api = HeatPumpApi(config)
     await hass.async_add_executor_job(heatPump_api.route_fetch)
-    heatpump_coordinator = RegulusUpdateCoordinator(hass, "heatPump", heatPump_api)
+    heatpump_coordinator = RegulusUpdateCoordinator(hass, "heatPump", heatPump_api, config["polling_interval"])
     await heatpump_coordinator.async_config_entry_first_refresh()
     _LOGGER.debug("HeatPump Coordinator data: %s", heatpump_coordinator.data)
 
     home_api = HomeApi(config)
     await hass.async_add_executor_job(home_api.route_fetch)
-    home_coordinator = RegulusUpdateCoordinator(hass, "home", home_api)
+    home_coordinator = RegulusUpdateCoordinator(hass, "home", home_api, config["polling_interval"])
     await home_coordinator.async_config_entry_first_refresh()
     _LOGGER.debug("Home Coordinator data: %s", home_coordinator.data)
 
