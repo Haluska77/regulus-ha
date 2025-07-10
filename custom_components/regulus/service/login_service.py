@@ -2,9 +2,6 @@ import requests
 from typing import Dict
 from .session_factory import SessionFactory
 from .xml_parser_service import parse_acer_value
-# from ..exception.unauthorized_error import UnAuthorizedError
-# from ..exception.illegal_status_error import IllegalStatusError
-
 
 class LoginService:
 
@@ -51,8 +48,3 @@ class LoginService:
     def validate_login_status(self, data: str):
         acer_value = parse_acer_value(data)
         print(f"Login error {acer_value}")
-
-        # if acer_value == "1":
-        #     raise UnAuthorizedError()
-        # else:
-        #     raise IllegalStatusError()
