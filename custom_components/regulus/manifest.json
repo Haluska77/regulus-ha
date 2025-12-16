@@ -7,5 +7,5 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/Haluska77/regulus-ha/issues",
   "requirements": [],
-  "version": "1.0.3"
+  "version": "2.0.0"
 }

@@ -3,7 +3,10 @@
 
 # Regulus Heat Pump Integration
 This repository makes integration of Regulus Heat Pumps into Homeassistant. Requires running heat pump connected to local network (obtaining local IP address) and basic login credentials for Regulus app provided by your seller.
-This supports IR12 and IR14 version controller. (selected by initial config form)
+This supports IR12 and IR14 1_0_10_0 version controller only.
+Any other versions are welcome by PR.
+
+Integration provides sensors (sensor and binary_sensor) and controls (number and switch) for controlling heat pump over the Homeassistant. 
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Haluska77&repository=regulus-ha&category=Integration)
 
