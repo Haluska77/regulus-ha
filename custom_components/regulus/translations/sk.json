@@ -13,5 +13,23 @@
         }
       }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Zmena konfigurácie",
+        "data": {
+          "ir_version": "IR verzia",
+          "polling_interval": "Interval načítania (v sekundách)",
+          "enable_home": "Povoliť Home",
+          "enable_heatPump": "Povoliť Heat Pump",
+          "enable_dashboard": "Povoliť Dashboard",
+          "enable_water": "Povoliť Water",
+          "enable_zone1": "Povoliť Zone 1",
+          "enable_zone2": "Povoliť Zone 2",
+          "enable_aku": "Povoliť AKU"
+        }
+      }
+    }
   }
 }

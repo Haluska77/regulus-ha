@@ -13,5 +13,23 @@
         }
       }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Regulus options",
+        "data": {
+          "ir_version": "IR version",
+          "polling_interval": "Polling interval (seconds)",
+          "enable_home": "Enable Home",
+          "enable_heatPump": "Enable Heat Pump",
+          "enable_dashboard": "Enable Dashboard",
+          "enable_water": "Enable Water",
+          "enable_zone1": "Enable Zone 1",
+          "enable_zone2": "Enable Zone 2",
+          "enable_aku": "Enable AKU"
+        }
+      }
+    }
   }
 }
