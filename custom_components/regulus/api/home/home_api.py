@@ -1,22 +1,20 @@
 from typing import Dict
 from homeassistant.const import Platform
 
-from custom_components.regulus.schema import sensor
+from ...schema import deviceSensor
 from .home_schemas import HomeResponseSchema
 from ...service.abstract_api import AbstractApi
-from ...service.xml_parser_service import get_value_from_map
 
 class HomeApi(AbstractApi[HomeResponseSchema]):
     page = "/home.xml"
+    key = "home"
+    name = "Home"
 
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> HomeResponseSchema:
-        print("Successfully fetched `/home` data")
 
         return HomeResponseSchema(
-            zone1SummerMode = sensor("Zone 1 Summer Mode", 
-                                          get_value_from_map(schema_xml_map, "zone1SummerMode", registry_mapper, converter=lambda v: v != "0"),
-                                          "", "none", "mdi:sun-snowflake-variant", Platform.BINARY_SENSOR),
-            zone2SummerMode = sensor("Zone 2 Summer Mode", 
-                                          get_value_from_map(schema_xml_map, "zone2SummerMode", registry_mapper, converter=lambda v: v != "0"),
-                                          "", "none", "mdi:sun-snowflake-variant", Platform.BINARY_SENSOR),
+            zone1SummerMode = deviceSensor("Zone 1 Summer Mode", "zone1SummerMode", None, None, "mdi:sun-snowflake-variant", 
+                                           Platform.BINARY_SENSOR, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
+            zone2SummerMode = deviceSensor("Zone 2 Summer Mode", "zone2SummerMode", None, None, "mdi:sun-snowflake-variant", 
+                                           Platform.BINARY_SENSOR, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
         )

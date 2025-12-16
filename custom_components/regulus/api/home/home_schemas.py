@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from ...schema import SensorSchema
+from ...schema import DeviceSchema
 
 class HomeResponseSchema(BaseModel):
-    zone1SummerMode: SensorSchema
-    zone2SummerMode: SensorSchema
+    zone1SummerMode: DeviceSchema
+    zone2SummerMode: DeviceSchema

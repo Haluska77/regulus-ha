@@ -1,22 +1,22 @@
 from pydantic import BaseModel
-from ...schema import SensorSchema
+from ...schema import DeviceSchema
 
 class HeatPumpResponseSchema(BaseModel):
-    runningTime: SensorSchema
-    idleTime: SensorSchema
-    overallStatisticsTotalHours: SensorSchema
-    overallStatisticsTotalStarts: SensorSchema
-    overallStatisticsTodayHours: SensorSchema
-    overallStatisticsTodayMinutes: SensorSchema
-    overallStatisticsTodayStarts: SensorSchema
-    overallStatisticsYesterdayHours: SensorSchema
-    overallStatisticsYesterdayMinutes: SensorSchema
-    overallStatisticsYesterdayStarts: SensorSchema
-    hotWaterStatisticsTotalHours: SensorSchema
-    hotWaterStatisticsTotalStarts: SensorSchema
-    hotWaterStatisticsTodayHours: SensorSchema
-    hotWaterStatisticsTodayMinutes: SensorSchema
-    hotWaterStatisticsTodayStarts: SensorSchema
-    hotWaterStatisticsYesterdayHours: SensorSchema
-    hotWaterStatisticsYesterdayMinutes: SensorSchema
-    hotWaterStatisticsYesterdayStarts: SensorSchema
+    runningTime: DeviceSchema
+    idleTime: DeviceSchema
+    overallStatisticsTotalHours: DeviceSchema
+    overallStatisticsTotalStarts: DeviceSchema
+    overallStatisticsTodayHours: DeviceSchema
+    overallStatisticsTodayMinutes: DeviceSchema
+    overallStatisticsTodayStarts: DeviceSchema
+    overallStatisticsYesterdayHours: DeviceSchema
+    overallStatisticsYesterdayMinutes: DeviceSchema
+    overallStatisticsYesterdayStarts: DeviceSchema
+    hotWaterStatisticsTotalHours: DeviceSchema
+    hotWaterStatisticsTotalStarts: DeviceSchema
+    hotWaterStatisticsTodayHours: DeviceSchema
+    hotWaterStatisticsTodayMinutes: DeviceSchema
+    hotWaterStatisticsTodayStarts: DeviceSchema
+    hotWaterStatisticsYesterdayHours: DeviceSchema
+    hotWaterStatisticsYesterdayMinutes: DeviceSchema
+    hotWaterStatisticsYesterdayStarts: DeviceSchema
