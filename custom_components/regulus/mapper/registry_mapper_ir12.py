@@ -9,7 +9,6 @@ REGISTRY_MAPPER = {
   "waterRunningStatusFromHeatPump": "__R12005.5_BOOL_i",
   "circulationRunningStatus": "__R10949.0_BOOL_i",
   "zone1RunningStatus": "__R15153_USINT_u",
-  "zone1Temperature": "__R128148_REAL_.1f",
   "zone1RequiredTemperature": "__R8453_REAL_.1f",
   "zone1HeatingWaterTemperature": "__R8323_REAL_.1f",
   "zone1RequiredHeatingWaterTemperature": "__R8429_REAL_.1f",
@@ -22,8 +21,6 @@ REGISTRY_MAPPER = {
   "akuBottomTemperature": "__R8389_REAL_.1f",
   "akuRequiredTemperature": "__R8417_REAL_.1f",
   "akuRunningStatusFromHeatPump": "__R156298.0_BOOL_i",
-  "waterSwitchingSensorTemperature": "__R8327_REAL_.1f",
-  "waterRequiredTemperature": "__R8505_INT_d",
   "solarPanelTemperature": "__R8319_REAL_.1f",
   "solarRunningStatus": "__R12018.4_BOOL_i",
 
@@ -50,4 +47,26 @@ REGISTRY_MAPPER = {
   # home
   "zone1SummerMode": "__R15209.0_BOOL_i",
   "zone2SummerMode": "__R18101.0_BOOL_i",
+  
+  #water
+  "waterState": "__R22589.0_BOOL_i",
+  "waterSwitchingSensorTemperature": "__R8327_REAL_.1f",
+  "waterRequiredTemperature": "__R8505_INT_d",
+  "waterComfortTemperature": "__R22600_REAL_.0f",
+  "waterSetbackTemperature": "__R22604_REAL_.0f",
+  
+  #zone1
+  'zone1State': '__R15114.0_BOOL_i',
+  'zone1Temperature': '__R128148_REAL_.1f',
+  'zone1DesiredTemperature': '__R15116_REAL_.1f',
+
+  #zone2
+  'zone2State': '__R18006.0_BOOL_i',
+  'zone2Temperature': '__R128170_REAL_.1f',
+  'zone2DesiredTemperature': '__R18008_REAL_.1f',
+
+  #aku
+  "akuState": "__R17960.0_BOOL_i",
+  "akuComfortTemperature": "__R17961_USINT_u",
+  "akuSetbackTemperature": "__R17962_USINT_u",
 }
