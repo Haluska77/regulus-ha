@@ -5,6 +5,7 @@ class RegistryResult(BaseModel):
     value: Optional[Union[str, bool, int]]
     error: Optional[str]
     
+#converts data from response xml to map - registry name-value pairs eg: '__R8266.1_BOOL_i': '0'
 def parse_xml_to_map(xml: str) -> Dict[str, str]:
     return parse_xml(get_registry_map, xml)
 
@@ -12,7 +13,7 @@ def parse_xml_to_map(xml: str) -> Dict[str, str]:
 def parse_acer_value(xml: str) -> str:
     return parse_xml(get_acer_value, xml)
 
-
+# map registry xml to name-value pairs
 def get_registry_map(parsed: Dict) -> Dict[str, str]:
     result = {}
     try:
@@ -36,7 +37,7 @@ def get_acer_value(parsed: Dict) -> str:
         print("Error extracting ACER value:", e)
         return ""
 
-
+# converts response xml to map
 def parse_xml(operation, xml: str):
     try:
         import xmltodict
@@ -52,7 +53,8 @@ def parse_xml(operation, xml: str):
 
 
 def get_value_from_map(
-    response_map: Dict[str, str], sensor_name: str, registry_mapper: Dict[str, str], converter: Optional[Callable[[str], Union[str, bool, int]]] = None
+    response_map: Dict[str, str], sensor_name: str, registry_mapper: Dict[str, str], 
+    converter: Optional[Callable[[str], Union[str, bool, int]]] = None
 ) -> RegistryResult:
     registry_name = registry_mapper.get(sensor_name)
     if registry_name is None:
