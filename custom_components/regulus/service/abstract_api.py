@@ -1,17 +1,21 @@
 import logging
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, Any, Dict
+from urllib.parse import urlencode
 
 from ..const import IR_VERSION_ALIASES
 from .session_factory import SessionFactory
 from .login_service import LoginService
 from .xml_parser_service import parse_xml_to_map
-from importlib import import_module
-from urllib.parse import urlencode
+from ..mapper.registry_mapper_ir12_04_10 import REGISTRY_MAPPER as ir12_04_10
+from ..mapper.registry_mapper_ir14_1_0_10_0 import REGISTRY_MAPPER as ir14_1_0_10_0
 
 T = TypeVar('T')
 registry_mapper: Dict[str, str] = {}
-
+REGISTRY_MAPPERS = {
+    "12_04_10": ir12_04_10,
+    "14_1_0_10_0": ir14_1_0_10_0,
+}
 _LOGGER = logging.getLogger(__name__)
 
 class AbstractApi(Generic[T], ABC):
@@ -91,16 +95,10 @@ class AbstractApi(Generic[T], ABC):
         except KeyError:
             raise ValueError(f"Unsupported ir_version: {raw_ir_version}")
 
-        module_name = (
-            f"custom_components.regulus.mapper.registry_mapper_ir{ir_version}"
-        )
-
         try:
-            module = import_module(module_name)
-        except ModuleNotFoundError as err:
+            return REGISTRY_MAPPERS[ir_version]
+        except KeyError as err:
             raise ValueError(f"No registry mapper for ir_version: {ir_version}") from err
-
-        return module.REGISTRY_MAPPER
 
     @abstractmethod
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> Any:
