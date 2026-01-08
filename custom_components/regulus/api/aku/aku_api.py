@@ -15,10 +15,10 @@ class AkuApi(AbstractApi[AkuResponseSchema]):
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> AkuResponseSchema:
 
         return AkuResponseSchema(
-            akuState = deviceSensor("Aku State", "akuState", "", BinarySensorDeviceClass.RUNNING, "mdi:sun-snowflake-variant",
+            akuState = deviceSensor("Aku State", "akuState", "", BinarySensorDeviceClass.RUNNING, "mdi:power",
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
-            akuComfortTemperature = deviceSensor("Comfort Temperature", "akuComfortTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
+            akuComfortTemperature = deviceSensor("Aku Comfort Temperature", "akuComfortTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.NUMBER, schema_xml_map, registry_mapper),
-            akuSetbackTemperature = deviceSensor("Setback Temperature", "akuSetbackTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
+            akuSetbackTemperature = deviceSensor("Aku Setback Temperature", "akuSetbackTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.NUMBER, schema_xml_map, registry_mapper),
         )

@@ -16,7 +16,7 @@ class Zone2Api(AbstractApi[Zone2ResponseSchema]):
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> Zone2ResponseSchema:
 
         return Zone2ResponseSchema(
-            zone2State = deviceSensor("Zone 2 State", "zone2State", "", BinarySensorDeviceClass.RUNNING, "mdi:heating-coil",
+            zone2State = deviceSensor("Zone 2 State", "zone2State", "", BinarySensorDeviceClass.RUNNING, "mdi:power",
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
             zone2Temperature = deviceSensor("Zone 2 Temperature", "zone2Temperature", "°C", SensorDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.SENSOR, schema_xml_map, registry_mapper),

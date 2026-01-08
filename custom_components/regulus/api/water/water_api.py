@@ -15,10 +15,10 @@ class WaterApi(AbstractApi[WaterResponseSchema]):
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> WaterResponseSchema:
 
         return WaterResponseSchema(
-            waterState = deviceSensor("Water State", "waterState", "", BinarySensorDeviceClass.RUNNING, "mdi:sun-snowflake-variant", 
+            waterState = deviceSensor("Water State", "waterState", "", BinarySensorDeviceClass.RUNNING, "mdi:power", 
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
-            waterComfortTemperature = deviceSensor("Comfort Temperature", "waterComfortTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
+            waterComfortTemperature = deviceSensor("Water Comfort Temperature", "waterComfortTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.NUMBER, schema_xml_map, registry_mapper),
-            waterSetbackTemperature = deviceSensor("Setback Temperature", "waterSetbackTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
+            waterSetbackTemperature = deviceSensor("Water Setback Temperature", "waterSetbackTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.NUMBER, schema_xml_map, registry_mapper),
         )
