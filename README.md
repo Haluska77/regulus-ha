@@ -9,8 +9,9 @@ Integration provides sensors (sensor and binary_sensor) and controls (number and
 
 ## Supported versions
 ### IR12 
-- 04.10
+- 04.10 (thanks to [@ondrey1000](https://github.com/ondrey1000))
 ### IR14 
+- 1.0.5.0 (thanks to [@grecoit](https://github.com/grecoit))
 - 1.0.10.0
 
 Any other versions are welcome by PR.
