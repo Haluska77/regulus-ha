@@ -1,22 +1,13 @@
-import logging
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, Any, Dict
 from urllib.parse import urlencode
-
-from ..const import IR_VERSION_ALIASES
 from .session_factory import SessionFactory
 from .login_service import LoginService
 from .xml_parser_service import parse_xml_to_map
-from ..mapper.registry_mapper_ir12_04_10 import REGISTRY_MAPPER as ir12_04_10
-from ..mapper.registry_mapper_ir14_1_0_10_0 import REGISTRY_MAPPER as ir14_1_0_10_0
+from ..const import REGISTRY_MAPPERS
 
 T = TypeVar('T')
 registry_mapper: Dict[str, str] = {}
-REGISTRY_MAPPERS = {
-    "12_04_10": ir12_04_10,
-    "14_1_0_10_0": ir14_1_0_10_0,
-}
-_LOGGER = logging.getLogger(__name__)
 
 class AbstractApi(Generic[T], ABC):
     page: str
@@ -89,12 +80,7 @@ class AbstractApi(Generic[T], ABC):
         except Exception as e:
             raise ValueError(f"Failed to parse response") from e
 
-    def load_registry_mapper_by_version(self, raw_ir_version: any) -> Dict[str, str]:
-        try:
-            ir_version = IR_VERSION_ALIASES[raw_ir_version]
-        except KeyError:
-            raise ValueError(f"Unsupported ir_version: {raw_ir_version}")
-
+    def load_registry_mapper_by_version(self, ir_version: any) -> Dict[str, str]:
         try:
             return REGISTRY_MAPPERS[ir_version]
         except KeyError as err:
