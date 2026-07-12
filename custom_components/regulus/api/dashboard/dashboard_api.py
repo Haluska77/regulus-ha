@@ -67,4 +67,10 @@ class DashboardApi(AbstractApi[DashboardResponseSchema]):
                                                  Platform.SENSOR, schema_xml_map, registry_mapper),
             circulationStatus = deviceSensor("Circulation Running Status", "circulationRunningStatus", "", BinarySensorDeviceClass.RUNNING, "mdi:sync", 
                                             Platform.BINARY_SENSOR, schema_xml_map, registry_mapper, converter=lambda v: v == "1"),
+            source1HeatingDemandTemperature = deviceSensor("Source 1 Heating Demand Temperature", "source1HeatingDemandTemperature", "°C", SensorDeviceClass.TEMPERATURE, "mdi:thermometer",
+                                                            Platform.SENSOR, schema_xml_map, registry_mapper),
+            fireplaceActualTemperature = deviceSensor("Fireplace Actual Temperature", "fireplaceActualTemperature", "°C", SensorDeviceClass.TEMPERATURE, "mdi:thermometer", 
+                                                      Platform.SENSOR, schema_xml_map, registry_mapper),
+            fireplacePumpRunningStatus = deviceSensor("Fireplace Pump Running Status", "fireplacePumpRunningStatus", "", BinarySensorDeviceClass.RUNNING, "mdi:fireplace", 
+                                                     Platform.BINARY_SENSOR, schema_xml_map, registry_mapper, converter=lambda v: v == "1")
         )

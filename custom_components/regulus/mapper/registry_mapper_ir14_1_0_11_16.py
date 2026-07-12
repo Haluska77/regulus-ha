@@ -4,7 +4,7 @@ REGISTRY_MAPPER = {
     "rcTariff": "__R8190.0_BOOL_i",
     "holiday": "__R20305.0_BOOL_i",
 
-    "circulationRunningStatus": "__R8180.0_BOOL_i",
+    "circulationRunningStatus": "__R6924.0_BOOL_i",
 
     "zone1RunningStatus": "__R16645_USINT_u",
     "zone1RequiredTemperature": "__R4246_REAL_.1f",
@@ -18,12 +18,12 @@ REGISTRY_MAPPER = {
     "zone2RequiredHeatingWaterTemperature": "__R111196_REAL_.1f",
 
     "akuTopTemperature": "__R4068_REAL_.1f",
-    "akuBottomTemperature": "__R8181_REAL_.1f",
+    "akuBottomTemperature": "__R4194_REAL_.1f",
     "akuRequiredTemperature": "__R4210_REAL_.1f",
     "akuRunningStatusFromHeatPump": "__R8220.1_BOOL_i",
 
-    "solarPanelTemperature": "__R4194_REAL_.1f",
-    "solarRunningStatus": "__Y794.0_BOOL_i",
+    "solarPanelTemperature": "__R4112_REAL_.1f",
+    "solarRunningStatus": "__R8191.4_BOOL_i",
 
     # heat pump / ZD_T.XML
     "hpRunningTime": "__R30079_TIME_Thh:mm:ss",
@@ -72,16 +72,23 @@ REGISTRY_MAPPER = {
 
     # zone1 / ZO_Z1.XML + schema
     "zone1State": "__R16592.1_BOOL_i",
-    "zone1Temperature": "__R4116_REAL_.1f",
+    "zone1Temperature": "__R111174_REAL_.1f",
     "zone1DesiredTemperature": "__R4246_REAL_.1f",
 
     # zone2 / ZO_Z2.XML + schema
     "zone2State": "__R19906.1_BOOL_i",
     "zone2Temperature": "__R4124_REAL_.1f",
     "zone2DesiredTemperature": "__R4250_REAL_.1f",
-
+    
     # aku
     "akuState": "__R8220.1_BOOL_i",
     "akuComfortTemperature": "__R4298_INT_d",
     "akuSetbackTemperature": "__R25169_SINT_d",
+
+    # source1 / dashboard
+    "source1HeatingDemandTemperature": "__R8181_REAL_.0f",
+
+    # fireplace / dashboard
+    "fireplaceActualTemperature": "__R5878_REAL_.0f",
+    "fireplacePumpRunningStatus": "__Y794.0_BOOL_i"
 }
