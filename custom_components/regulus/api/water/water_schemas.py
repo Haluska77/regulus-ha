@@ -6,3 +6,5 @@ class WaterResponseSchema(BaseModel):
     waterState: DeviceSchema
     waterComfortTemperature: DeviceSchema
     waterSetbackTemperature: DeviceSchema
+    waterOneTimeHeatingState: DeviceSchema
+    waterOneTimeHeatingTemperature: DeviceSchema
