@@ -1,5 +1,5 @@
-[![version](https://img.shields.io/github/manifest-json/v/Haluska77/regulus-ha?filename=custom_components%2Fregulus%2Fmanifest.json&label=version)](https://github.com/Haluska77/regulus-ha/releases/latest)
-![HACS installs](https://img.shields.io/badge/dynamic/json?url=https://analytics.hacs.xyz/regulus-ha&query=$.installs&label=HACS%20installs)
+[![Version](https://img.shields.io/github/v/release/Haluska77/regulus-ha)](https://github.com/Haluska77/regulus-ha/releases)
+![Downloads](https://img.shields.io/github/downloads/Haluska77/regulus-ha/total)
 
 # Regulus Heat Pump Integration
 This repository makes integration of Regulus Heat Pumps into Homeassistant. Requires running heat pump connected to local network (obtaining local IP address) and basic login credentials for Regulus app provided by your seller.
