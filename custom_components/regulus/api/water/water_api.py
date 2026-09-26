@@ -18,12 +18,12 @@ class WaterApi(AbstractApi[WaterResponseSchema]):
             waterState = deviceSensor("Water State", "waterState", "", BinarySensorDeviceClass.RUNNING, "mdi:power", 
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
             waterComfortTemperature = deviceSensor("Water Comfort Temperature", "waterComfortTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
-                                        Platform.NUMBER, schema_xml_map, registry_mapper),
+                                        Platform.NUMBER, schema_xml_map, registry_mapper, step=1),
             waterSetbackTemperature = deviceSensor("Water Setback Temperature", "waterSetbackTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
-                                        Platform.NUMBER, schema_xml_map, registry_mapper),
+                                        Platform.NUMBER, schema_xml_map, registry_mapper, step=1),
             waterOneTimeHeatingState = deviceSensor("Water One-Time Heating State", "waterOneTimeHeatingState", "", BinarySensorDeviceClass.RUNNING, "mdi:power", 
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
             waterOneTimeHeatingTemperature = deviceSensor("Water One-Time Heating Temperature", "waterOneTimeHeatingTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
-                                        Platform.NUMBER, schema_xml_map, registry_mapper),
+                                        Platform.NUMBER, schema_xml_map, registry_mapper, step=1),
 
         )

@@ -18,7 +18,7 @@ class AkuApi(AbstractApi[AkuResponseSchema]):
             akuState = deviceSensor("Aku State", "akuState", "", BinarySensorDeviceClass.RUNNING, "mdi:power",
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
             akuComfortTemperature = deviceSensor("Aku Comfort Temperature", "akuComfortTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
-                                        Platform.NUMBER, schema_xml_map, registry_mapper),
+                                        Platform.NUMBER, schema_xml_map, registry_mapper, step=1),
             akuSetbackTemperature = deviceSensor("Aku Setback Temperature", "akuSetbackTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
-                                        Platform.NUMBER, schema_xml_map, registry_mapper),
+                                        Platform.NUMBER, schema_xml_map, registry_mapper, step=1),
         )

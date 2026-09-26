@@ -4,7 +4,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 
 from .schema import DeviceSchema
-from .const import DOMAIN, NAME, COMPANY
+from .const import DOMAIN
 from .base import DynamicBase
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities):
