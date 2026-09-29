@@ -29,7 +29,7 @@ class DynamicNumber(DynamicBase, NumberEntity):
 
         self._attr_native_unit_of_measurement = sensor_data.get("unit")
         self._attr_device_class = sensor_data.get("deviceClass")
-        self._attr_native_min_value = sensor_data.get("min", 0)
+        self._attr_native_min_value = sensor_data.get("min", -100)
         self._attr_native_max_value = sensor_data.get("max", 100)
         self._attr_native_step = sensor_data.get("step", 0.1)
         self._attr_mode = NumberMode.BOX
