@@ -12,6 +12,7 @@ from .api.water.water_api import WaterApi
 from .api.zone1.zone1_api import Zone1Api
 from .api.aku.aku_api import AkuApi
 from .api.zone2.zone2_api import Zone2Api
+from .api.solar.solar_api import SolarApi
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
@@ -31,6 +32,7 @@ API_CLASSES = [
     WaterApi,
     Zone1Api,
     Zone2Api,
+    SolarApi,
 ]
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
