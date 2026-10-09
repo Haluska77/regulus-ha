@@ -60,6 +60,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             _LOGGER.debug("%s API disabled", api.key)
             continue
 
+        if not api.is_supported(config["ir_version"]):
+            _LOGGER.debug("%s API not supported by IR version %s", api.key, config["ir_version"])
+            continue
+
         try:
             api_instance = api(config)
             await hass.async_add_executor_job(api_instance.route_fetch)

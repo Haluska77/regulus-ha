@@ -80,6 +80,11 @@ class AbstractApi(Generic[T], ABC):
         except Exception as e:
             raise ValueError(f"Failed to parse response") from e
 
+    @classmethod
+    def is_supported(cls, ir_version: str) -> bool:
+        """Optional pages override this, so firmware without them never fetches them."""
+        return True
+
     def load_registry_mapper_by_version(self, ir_version: any) -> Dict[str, str]:
         try:
             return REGISTRY_MAPPERS[ir_version]

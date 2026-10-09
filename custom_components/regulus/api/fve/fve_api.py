@@ -6,6 +6,7 @@ from ...schema import DeviceSchema, deviceSensor
 from .fve_schemas import FveResponseSchema
 from ...service.abstract_api import AbstractApi
 from ...service.xml_parser_service import get_value_from_map
+from ...const import REGISTRY_MAPPERS
 
 PHASES = ("L1", "L2", "L3")
 
@@ -57,6 +58,10 @@ class FveApi(AbstractApi[FveResponseSchema]):
     page = "/zd_f_sch.xml"
     key = "fve"
     name = "FVE"
+
+    @classmethod
+    def is_supported(cls, ir_version: str) -> bool:
+        return "fveGridPowerTotal" in REGISTRY_MAPPERS.get(ir_version, {})
 
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> FveResponseSchema:
         imported, exported, flow_error = grid_flow(schema_xml_map, registry_mapper)
