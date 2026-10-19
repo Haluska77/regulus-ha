@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -15,6 +16,9 @@ from .api.zone2.zone2_api import Zone2Api
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
+
+SETUP_ATTEMPTS = 3
+SETUP_RETRY_DELAY = 5  # seconds, multiplied by attempt number
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
@@ -58,16 +62,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             _LOGGER.debug("%s API disabled", api.key)
             continue
 
-        try:
-            api_instance = api(config)
-            await hass.async_add_executor_job(api_instance.route_fetch)
-            coordinator = RegulusUpdateCoordinator(hass, api_instance, scan_interval=config["polling_interval"])
-            await coordinator.async_config_entry_first_refresh()
-            coordinators.append(coordinator)
-            _LOGGER.info("%s coordinator ready", api.name)
-
-        except Exception as e:
-            _LOGGER.error("Failed to setup %s API: %s", api.name, e)
+        # The IR controller is slow and serves one request at a time; a single
+        # failed page at startup must not leave the whole device unavailable.
+        for attempt in range(1, SETUP_ATTEMPTS + 1):
+            try:
+                api_instance = api(config)
+                await hass.async_add_executor_job(api_instance.route_fetch)
+                coordinator = RegulusUpdateCoordinator(hass, api_instance, scan_interval=config["polling_interval"])
+                await coordinator.async_config_entry_first_refresh()
+                coordinators.append(coordinator)
+                _LOGGER.info("%s coordinator ready", api.name)
+                break
+            except Exception as e:
+                if attempt < SETUP_ATTEMPTS:
+                    _LOGGER.warning("Setup of %s API failed (attempt %s/%s), retrying: %s",
+                                    api.name, attempt, SETUP_ATTEMPTS, e)
+                    await asyncio.sleep(SETUP_RETRY_DELAY * attempt)
+                else:
+                    _LOGGER.exception("Failed to setup %s API: %s", api.name, e)
         
     hass.data[DOMAIN][entry.entry_id] = {
         "coordinators": coordinators,

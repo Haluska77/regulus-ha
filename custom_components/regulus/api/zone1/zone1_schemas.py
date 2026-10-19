@@ -6,3 +6,4 @@ class Zone1ResponseSchema(BaseModel):
     zone1State: DeviceSchema
     zone1Temperature: DeviceSchema
     zone1DesiredTemperature: DeviceSchema
+    zone1Humidity: DeviceSchema

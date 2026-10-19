@@ -27,7 +27,7 @@ class AbstractApi(Generic[T], ABC):
         try:
             return self.execute(lambda: self.session.get(api_url, allow_redirects=False))
         except Exception as e:
-            raise ValueError(f"Failed to fetch") from e
+            raise ValueError(f"Failed to fetch {api_url}: {e!r}") from e
     
     def route_update(self, body: Dict[str, Any]) -> Any:
         return self.update(body)
@@ -78,7 +78,7 @@ class AbstractApi(Generic[T], ABC):
 
             return response.dict()
         except Exception as e:
-            raise ValueError(f"Failed to parse response") from e
+            raise ValueError(f"Failed to parse response: {e!r}") from e
 
     def load_registry_mapper_by_version(self, ir_version: any) -> Dict[str, str]:
         try:
