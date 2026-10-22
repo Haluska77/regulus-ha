@@ -33,6 +33,7 @@ class DashboardResponseSchema(BaseModel):
     systemPressure: DeviceSchema
     waterElectricRequiredTemperature: DeviceSchema
     akuElectricRequiredTemperature: DeviceSchema
+    source1Status: DeviceSchema
     fireplaceActualTemperature: DeviceSchema
     fireplacePumpRunningStatus: DeviceSchema
 

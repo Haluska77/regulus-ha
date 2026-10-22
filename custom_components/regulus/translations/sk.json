@@ -27,7 +27,8 @@
           "enable_water": "Povoliť Water",
           "enable_zone1": "Povoliť Zone 1",
           "enable_zone2": "Povoliť Zone 2",
-          "enable_aku": "Povoliť AKU"
+          "enable_aku": "Povoliť AKU",
+          "enable_solar": "Povoliť Solar"
         }
       }
     }
