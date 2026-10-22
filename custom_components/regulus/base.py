@@ -13,7 +13,7 @@ class DynamicBase(CoordinatorEntity):
         self._api = coordinator.api
         self._key = key
 
-        self._attr_unique_id = f"{DOMAIN}_{key}"
+        self._attr_unique_id = f"{DOMAIN}_{coordinator.api.key}_{key}"
         self._attr_name = sensor_data["name"]
         self._attr_icon = sensor_data.get("icon")
         self._attr_device_info = DeviceInfo(
