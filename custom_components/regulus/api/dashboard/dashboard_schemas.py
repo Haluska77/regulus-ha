@@ -29,6 +29,10 @@ class DashboardResponseSchema(BaseModel):
     solarPanelTemperature: DeviceSchema
     circulationStatus: DeviceSchema
     source1HeatingDemandTemperature: DeviceSchema
+    source1Temperature: DeviceSchema
+    systemPressure: DeviceSchema
+    waterElectricRequiredTemperature: DeviceSchema
+    akuElectricRequiredTemperature: DeviceSchema
     source1Status: DeviceSchema
     fireplaceActualTemperature: DeviceSchema
     fireplacePumpRunningStatus: DeviceSchema
