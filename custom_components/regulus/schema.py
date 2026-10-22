@@ -11,13 +11,13 @@ class DeviceSchema(BaseModel):
         deviceClass: Optional[str]
         icon: Optional[str]
         platform: Platform
-        step: Optional[int] = None
+        step: Optional[float] = None
         error: Optional[str] = None
 
 def deviceSensor(name: str, registryKey: str, unit: str, device_class: str, icon: str, platform: Platform, 
                  schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str], 
                  converter: Optional[Callable[[str], Union[str, bool, int]]] = None,
-                 step: Optional[int] = None) -> DeviceSchema:
+                 step: Optional[float] = None) -> DeviceSchema:
         device = get_value_from_map(schema_xml_map, registryKey, registry_mapper, converter)
         return DeviceSchema(
             name=name,

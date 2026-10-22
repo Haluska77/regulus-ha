@@ -22,4 +22,6 @@ class Zone1Api(AbstractApi[Zone1ResponseSchema]):
                                         Platform.SENSOR, schema_xml_map, registry_mapper),
             zone1DesiredTemperature = deviceSensor("Zone 1 Desired Temperature", "zone1DesiredTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.NUMBER, schema_xml_map, registry_mapper, step=0.1),
+            zone1Humidity = deviceSensor("Zone 1 Humidity", "zone1Humidity", "%", SensorDeviceClass.HUMIDITY, "mdi:water-percent",
+                                        Platform.SENSOR, schema_xml_map, registry_mapper),
         )
