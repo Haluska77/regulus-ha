@@ -24,6 +24,8 @@ class DynamicSensor(DynamicBase, SensorEntity):
 
         self._attr_native_unit_of_measurement = sensor_data.get("unit")
         self._attr_device_class = sensor_data.get("deviceClass")
+        if sensor_data.get("deviceClass") in ("power", "temperature"):
+            self._attr_state_class = "measurement"
 
     @property
     def native_value(self):
