@@ -28,6 +28,7 @@
           "enable_zone1": "Povoliť Zone 1",
           "enable_zone2": "Povoliť Zone 2",
           "enable_aku": "Povoliť AKU",
+          "enable_solar": "Povoliť Solar",
           "enable_fve": "Povoliť FVE (wattmeter siete, elektrické teleso)"
         }
       }
