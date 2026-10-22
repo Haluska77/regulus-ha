@@ -3,7 +3,7 @@ from homeassistant.const import Platform
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from .dashboard_schemas import DashboardResponseSchema
 from ...service.abstract_api import AbstractApi
 

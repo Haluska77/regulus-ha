@@ -1,7 +1,7 @@
 from typing import Dict
 from homeassistant.const import Platform
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from .home_schemas import HomeResponseSchema
 from ...service.abstract_api import AbstractApi
 

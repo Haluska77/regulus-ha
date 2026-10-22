@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Callable, Optional, Dict, Union
 from homeassistant.const import Platform
-from .service.xml_parser_service import get_value_from_map
+from ..service.xml_parser_service import get_value_from_map
 
 class DeviceSchema(BaseModel):
         name: Optional[str]

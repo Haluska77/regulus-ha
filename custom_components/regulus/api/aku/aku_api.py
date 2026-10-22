@@ -3,7 +3,7 @@ from homeassistant.const import Platform
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from .aku_schemas import AkuResponseSchema
 from ...service.abstract_api import AbstractApi
 

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from ...schema import DeviceSchema
+from ..schema import DeviceSchema
 
 class DashboardResponseSchema(BaseModel):
     outdoorTemperature: DeviceSchema

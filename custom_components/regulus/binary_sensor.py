@@ -3,7 +3,7 @@ from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 
-from .schema import DeviceSchema
+from .api.schema import DeviceSchema
 from .const import DOMAIN
 from .base import DynamicBase
 

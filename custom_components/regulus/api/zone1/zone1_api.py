@@ -4,7 +4,7 @@ from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from .zone1_schemas import Zone1ResponseSchema
 from ...service.abstract_api import AbstractApi
 

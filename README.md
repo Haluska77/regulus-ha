@@ -12,10 +12,10 @@ Integration provides sensors (sensor and binary_sensor) and controls (number and
 - 04.10 (thanks to [@ondrey1000](https://github.com/ondrey1000))
 ### IR14 
 - 1.0.5.0 (thanks to [@grecoit](https://github.com/grecoit))
-- 1.0.6.0 (IR RegulusBOX CTC, 07.10.2022)
+- 1.0.6.0 (thanks to [@radkul](https://github.com/radkul))
 - 1.0.7.0 (thanks to [@petrrybar111](https://github.com/petrrybar111))
 - 1.0.10.0
-- 1.0.10.107
+- 1.0.10.107 (thanks to [@honzito](https://github.com/honzito))
 - 1.0.11.0 (thanks to [@petrmac](https://github.com/petrmac))
 - 1.0.11.4 (thanks to [@cwm77](https://github.com/cwm77))
 - 1.0.11.16 (thanks to [@grecoit](https://github.com/grecoit), [@jkremlacek](https://github.com/jkremlacek))

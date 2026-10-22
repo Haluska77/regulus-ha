@@ -81,7 +81,7 @@ class AbstractApi(Generic[T], ABC):
             raise ValueError(f"Failed to parse response: {e!r}") from e
 
     @classmethod
-    def is_supported(cls, ir_version: str) -> bool:
+    def is_api_supported(cls, ir_version: str) -> bool:
         """Optional pages override this, so firmware without them never fetches them."""
         return True
 

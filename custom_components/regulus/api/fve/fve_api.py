@@ -2,7 +2,7 @@ from typing import Dict, Optional, Tuple
 from homeassistant.const import Platform
 from homeassistant.components.sensor import SensorDeviceClass
 
-from ...schema import DeviceSchema, deviceSensor
+from ..schema import DeviceSchema, deviceSensor
 from .fve_schemas import FveResponseSchema
 from ...service.abstract_api import AbstractApi
 from ...service.xml_parser_service import get_value_from_map
@@ -39,7 +39,7 @@ def grid_flow(schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -
     return imported, exported, None
 
 
-def computedSensor(name: str, value: Optional[int], icon: str, error: Optional[str]) -> DeviceSchema:
+def computedPowerSensor(name: str, value: Optional[int], icon: str, error: Optional[str]) -> DeviceSchema:
     return DeviceSchema(
         name=name,
         value=None if value is None else str(value),
@@ -60,7 +60,7 @@ class FveApi(AbstractApi[FveResponseSchema]):
     name = "FVE"
 
     @classmethod
-    def is_supported(cls, ir_version: str) -> bool:
+    def is_api_supported(cls, ir_version: str) -> bool:
         return "fveGridPowerTotal" in REGISTRY_MAPPERS.get(ir_version, {})
 
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> FveResponseSchema:
@@ -76,9 +76,9 @@ class FveApi(AbstractApi[FveResponseSchema]):
                                        Platform.SENSOR, schema_xml_map, registry_mapper),
             gridPowerTotal = deviceSensor("Grid Power Total", "fveGridPowerTotal", "W", SensorDeviceClass.POWER, "mdi:transmission-tower",
                                           Platform.SENSOR, schema_xml_map, registry_mapper),
-            gridImportPower = computedSensor("Grid Import Power", imported, "mdi:transmission-tower-import", flow_error),
-            gridExportPower = computedSensor("Grid Export Power", exported, "mdi:transmission-tower-export", flow_error),
-            gridPowerNet = computedSensor("Grid Power Net", net, "mdi:transmission-tower", flow_error),
+            gridImportPower = computedPowerSensor("Grid Import Power", imported, "mdi:transmission-tower-import", flow_error),
+            gridExportPower = computedPowerSensor("Grid Export Power", exported, "mdi:transmission-tower-export", flow_error),
+            gridPowerNet = computedPowerSensor("Grid Power Net", net, "mdi:transmission-tower", flow_error),
             heaterPowerL1 = deviceSensor("Heater Power L1", "fveHeaterPowerL1", "W", SensorDeviceClass.POWER, "mdi:heating-coil",
                                          Platform.SENSOR, schema_xml_map, registry_mapper),
             heaterPowerL2 = deviceSensor("Heater Power L2", "fveHeaterPowerL2", "W", SensorDeviceClass.POWER, "mdi:heating-coil",

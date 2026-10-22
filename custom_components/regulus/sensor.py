@@ -1,9 +1,9 @@
 from homeassistant.core import HomeAssistant
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import (SensorEntity, SensorStateClass, SensorDeviceClass)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 
-from .schema import DeviceSchema
+from .api.schema import DeviceSchema
 from .const import DOMAIN
 from .base import DynamicBase
 
@@ -24,8 +24,9 @@ class DynamicSensor(DynamicBase, SensorEntity):
 
         self._attr_native_unit_of_measurement = sensor_data.get("unit")
         self._attr_device_class = sensor_data.get("deviceClass")
-        if sensor_data.get("deviceClass") in ("power", "temperature"):
-            self._attr_state_class = "measurement"
+        if sensor_data.get("deviceClass") in (SensorDeviceClass.POWER, SensorDeviceClass.TEMPERATURE, 
+                                              SensorDeviceClass.PRESSURE, SensorDeviceClass.HUMIDITY):
+            self._attr_state_class = SensorStateClass.MEASUREMENT
 
     @property
     def native_value(self):

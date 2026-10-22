@@ -3,7 +3,7 @@ from homeassistant.const import Platform
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from .water_schemas import WaterResponseSchema
 from ...service.abstract_api import AbstractApi
 

@@ -5,7 +5,7 @@ from homeassistant.components.number import NumberDeviceClass
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import Platform
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from ...service.abstract_api import AbstractApi
 from .solar_schemas import SolarResponseSchema
 

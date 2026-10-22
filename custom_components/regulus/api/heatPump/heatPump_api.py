@@ -1,18 +1,11 @@
 from typing import Dict
+from util import latin_to_cp1250_converter
 from homeassistant.const import Platform
 from homeassistant.components.sensor import SensorDeviceClass
 
-from ...schema import deviceSensor
+from ..schema import deviceSensor
 from .heatPump_schemas import HeatPumpResponseSchema
 from ...service.abstract_api import AbstractApi
-
-def _decode_cp1250(value: str) -> str:
-    """The IR controller serves XML declared as windows-1250 without a charset header,
-    so requests decodes it as ISO-8859-1. Re-decode STRING registers properly."""
-    try:
-        return value.encode("latin-1").decode("cp1250", errors="replace")
-    except (UnicodeEncodeError, AttributeError):
-        return value
 
 class HeatPumpApi(AbstractApi[HeatPumpResponseSchema]):
     page = "/zd_t.xml"
@@ -23,7 +16,7 @@ class HeatPumpApi(AbstractApi[HeatPumpResponseSchema]):
 
         return HeatPumpResponseSchema(
             status = deviceSensor("Heat Pump Status", "hpStatus", None, None, "mdi:heat-pump",
-                                  Platform.SENSOR, schema_xml_map, registry_mapper, _decode_cp1250),
+                                  Platform.SENSOR, schema_xml_map, registry_mapper, converter=latin_to_cp1250_converter),
             compressorSpeed = deviceSensor("Heat Pump Compressor Speed", "hpCompressorSpeed", "rps", None, "mdi:speedometer",
                                            Platform.SENSOR, schema_xml_map, registry_mapper),
             runningTime = deviceSensor("Heat Pump Running Time", "hpRunningTime", None, None, "mdi:clock-outline", 

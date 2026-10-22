@@ -4,7 +4,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .schema import DeviceSchema
+from .api.schema import DeviceSchema
 from .const import DOMAIN
 from .service.abstract_api import AbstractApi
 from .base import DynamicBase
