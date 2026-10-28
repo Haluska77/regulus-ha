@@ -13,7 +13,6 @@ REGISTRY_MAPPER = {
   "zone1HeatingWaterTemperature": "__R8323_REAL_.1f",
   "zone1RequiredHeatingWaterTemperature": "__R8429_REAL_.1f",
   "zone2RunningStatus": "__R18045_USINT_u",
-  "zone2Temperature": "__R128170_REAL_.1f",
   "zone2RequiredTemperature": "__R8457_REAL_.1f",
   "zone2HeatingWaterTemperature": "__R8331_REAL_.1f",
   "zone2RequiredHeatingWaterTemperature": "__R8433_REAL_.1f",

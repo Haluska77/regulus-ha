@@ -1,5 +1,5 @@
 from typing import Dict
-from util import latin_to_cp1250_converter
+from ..util import latin_to_cp1250_converter
 from homeassistant.const import Platform
 from homeassistant.components.sensor import SensorDeviceClass
 

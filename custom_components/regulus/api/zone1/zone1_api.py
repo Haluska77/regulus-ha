@@ -16,12 +16,12 @@ class Zone1Api(AbstractApi[Zone1ResponseSchema]):
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> Zone1ResponseSchema:
 
         return Zone1ResponseSchema(
-            zone1State = deviceSensor("Zone 1 State", "zone1State", "", BinarySensorDeviceClass.RUNNING, "mdi:power", 
+            state = deviceSensor("State", "zone1State", "", BinarySensorDeviceClass.RUNNING, "mdi:power", 
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
-            zone1Temperature = deviceSensor("Zone 1 Temperature", "zone1Temperature", "°C", SensorDeviceClass.TEMPERATURE, "mdi:thermometer", 
+            temperature = deviceSensor("Temperature", "zone1Temperature", "°C", SensorDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.SENSOR, schema_xml_map, registry_mapper),
-            zone1DesiredTemperature = deviceSensor("Zone 1 Desired Temperature", "zone1DesiredTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
+            desiredTemperature = deviceSensor("Desired Temperature", "zone1DesiredTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.NUMBER, schema_xml_map, registry_mapper, step=0.1),
-            zone1Humidity = deviceSensor("Zone 1 Humidity", "zone1Humidity", "%", SensorDeviceClass.HUMIDITY, "mdi:water-percent",
-                                        Platform.SENSOR, schema_xml_map, registry_mapper),
+            humidity = deviceSensor("Humidity", "zone1Humidity", "%", SensorDeviceClass.HUMIDITY, "mdi:water-percent",
+                                        Platform.SENSOR, schema_xml_map, registry_mapper)
         )

@@ -22,7 +22,6 @@ REGISTRY_MAPPER = {
 
     # zone2 / dashboard + ZO_Z2.XML
     "zone2RunningStatus": "__R7720.1_BOOL_i",
-    "zone2Temperature": "__R3810_REAL_.1f",
     "zone2RequiredTemperature": "__R126400_REAL_.1f",
     "zone2HeatingWaterTemperature": "__R3684_REAL_.1f",
     "zone2RequiredHeatingWaterTemperature": "__R3786_REAL_.1f",

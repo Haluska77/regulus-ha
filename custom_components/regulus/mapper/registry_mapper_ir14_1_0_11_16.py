@@ -1,24 +1,29 @@
 REGISTRY_MAPPER = {
     # dashboard / schema
     "outdoorTemperature": "__R4060_REAL_.1f",
-    "rcTariff": "__R8190.0_BOOL_i",
-    "holiday": "__R20305.0_BOOL_i",
+    "rcTariff": "__R6924.2_BOOL_i",
+    "holiday": "__R4059.1_BOOL_i",
+
+    "heatPumpRunningStatus": "__R8178.0_BOOL_i",
+    "heatPumpOutletTemperature": "__R8172_INT_-4.1d",
+    "heatPumpInletTemperature": "__R8170_INT_-4.1d",
 
     "circulationRunningStatus": "__R6924.0_BOOL_i",
 
     "zone1RunningStatus": "__R16645_USINT_u",
     "zone1RequiredTemperature": "__R4246_REAL_.1f",
-    "zone1HeatingWaterTemperature": "__R4222_REAL_.1f",
-    "zone1RequiredHeatingWaterTemperature": "__R111174_REAL_.1f",
+    "zone1HeatingWaterTemperature": "__R4116_REAL_.1f",
+    "zone1RequiredHeatingWaterTemperature": "__R4222_REAL_.1f",
 
     "zone2RunningStatus": "__R19959_USINT_u",
-    "zone2Temperature": "__R4124_REAL_.1f",
     "zone2RequiredTemperature": "__R4250_REAL_.1f",
-    "zone2HeatingWaterTemperature": "__R4226_REAL_.1f",
-    "zone2RequiredHeatingWaterTemperature": "__R111196_REAL_.1f",
+    "zone2HeatingWaterTemperature": "__R4124_REAL_.1f",
+    "zone2RequiredHeatingWaterTemperature": "__R4226_REAL_.1f",
+
+    "waterRunningStatusFromHeatPump": "__R8230.1_BOOL_i",
 
     "akuTopTemperature": "__R4068_REAL_.1f",
-    "akuBottomTemperature": "__R4194_REAL_.1f",
+    "akuBottomTemperature": "__R4182_REAL_.1f",
     "akuRequiredTemperature": "__R4210_REAL_.1f",
     "akuRunningStatusFromHeatPump": "__R8220.1_BOOL_i",
 
@@ -74,8 +79,8 @@ REGISTRY_MAPPER = {
     "hpInletTemperature": "__R29476_INT_-5.1d",
 
     # home
-    "zone1SummerMode": "__R25321.1_BOOL_i",
-    "zone2SummerMode": "__R25424.1_BOOL_i",
+    "zone1SummerMode": "__R16701.0_BOOL_i",
+    "zone2SummerMode": "__R20015.0_BOOL_i",
 
     # water / dashboard + TV_TC
     "waterState": "__R25144.0_BOOL_i",
@@ -93,7 +98,7 @@ REGISTRY_MAPPER = {
 
     # zone2 / ZO_Z2.XML + schema
     "zone2State": "__R19906.1_BOOL_i",
-    "zone2Temperature": "__R4124_REAL_.1f",
+    "zone2Temperature": "__R111196_REAL_.1f",
     "zone2DesiredTemperature": "__R4250_REAL_.1f",
     
     # aku
