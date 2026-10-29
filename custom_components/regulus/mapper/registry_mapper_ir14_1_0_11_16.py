@@ -117,6 +117,11 @@ REGISTRY_MAPPER = {
     "source1HeatingDemandTemperature": "__R8181_REAL_.0f",
     "source1RunningStatus": "__Y6.3_BOOL_i",
 
+    # source2
+    "source2State": "__R25424.0_BOOL_i",
+    "source2ServiceEnabled": "__R25424.1_BOOL_i",
+    "source2HeatingDemandTemperature": "__R119408_REAL_.1f",
+    
     # fireplace / dashboard
     "fireplaceActualTemperature": "__R5878_REAL_.0f",
     "fireplacePumpRunningStatus": "__Y794.0_BOOL_i"
