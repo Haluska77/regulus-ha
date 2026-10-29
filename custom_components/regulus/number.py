@@ -6,7 +6,6 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .api.schema import DeviceSchema
 from .const import DOMAIN
-from .service.abstract_api import AbstractApi
 from .base import DynamicBase
 from typing import TypeVar
 
@@ -17,6 +16,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 
     for coordinator in hass.data[DOMAIN][entry.entry_id]["coordinators"]:
         for key, value in coordinator.data.items():
+            entity_filter = value.get("filter")
+            if entity_filter is not None:
+                if not entity_filter(entry.data.get("ir_version")):
+                    continue
+
             if value["platform"] == Platform.NUMBER:
                 entities.append(DynamicNumber(coordinator, entry, key, value))
 

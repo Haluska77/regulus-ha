@@ -92,10 +92,8 @@ REGISTRY_MAPPER = {
     "waterServiceEnabled": "__R25144.1_BOOL_i",
     "waterSwitchingSensorTemperature": "__R4120_REAL_.1f",
     "waterRequiredTemperature": "__R4298_INT_d",
-    # "waterComfortTemperature": "__R4298_INT_d",
-    # "waterSetbackTemperature": "__R25169_SINT_d",
-    "waterSetTemperature": "__R25165_REAL_.0f",
-    "waterDecreasedSetbackTemperature": "__R25169_SINT_d",
+    "waterComfortTemperature": "__R25165_REAL_.0f",
+    "waterSetbackTemperature": "__R25169_SINT_d",
     "waterOneTimeHeatingTemperature": "__R25183_SINT_d",
     "waterOneTimeHeatingState": "__R25184.0_BOOL_i",
 
@@ -111,6 +109,7 @@ REGISTRY_MAPPER = {
     
     # aku
     "akuState": "__R19862.0_BOOL_i",
+    "akuServiceEnabled": "__R19862.1_BOOL_i",
     "akuComfortTemperature": "__R19863_SINT_d",
     "akuSetbackTemperature": "__R19866_SINT_d",
 

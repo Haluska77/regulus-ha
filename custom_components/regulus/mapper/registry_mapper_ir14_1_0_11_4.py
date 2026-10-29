@@ -76,7 +76,6 @@ REGISTRY_MAPPER = {
     "waterRequiredTemperature": "__R23460_REAL_.0f",
     "waterComfortTemperature": "__R23478_SINT_d",
     "waterSetbackTemperature": "__R23464_SINT_d",
-
     "waterOneTimeHeatingTemperature": "__R3858_INT_d",
     "waterOneTimeHeatingState": "__R23479.0_BOOL_i",
 
