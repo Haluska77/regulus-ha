@@ -37,6 +37,9 @@ REGISTRY_MAPPER = {
     "solarRunningStatus": "__Y794.0_BOOL_i",
 
     # heat pump / ZD_T.XML
+    "hpRunningStatus": "__R29284.0_BOOL_i",
+    "hpCompressorSpeed": "__R27682_INT_-5.1d",
+    "hpStatus": "__R25147_STRING[20]_s",
     "hpRunningTime": "__R28020_TIME_Thh:mm:ss",
     "hpIdleTime": "__R28032_TIME_Thh:mm:ss",
 
@@ -61,12 +64,6 @@ REGISTRY_MAPPER = {
     "hotWaterYesterdayHours": "__R27991_USINT_u",
     "hotWaterYesterdayMinutes": "__R27992_UINT_u",
     "hotWaterYesterdayStarts": "__R28011_USINT_u",
-
-    "hpRunningStatus": "__R29284.0_BOOL_i",
-    "hpCompressorSpeed": "__R27682_INT_-5.1d",
-    "hpStatusText": "__R25147_STRING[20]_s",
-    "hpOutletTemperature": "__R27450_INT_-5.1d",
-    "hpInletTemperature": "__R27446_INT_-5.1d",
 
     # home
     "zone1SummerMode": "__R15008.0_BOOL_i",

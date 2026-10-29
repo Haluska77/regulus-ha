@@ -30,23 +30,34 @@ REGISTRY_MAPPER = {
     "solarPanelTemperature": "__R4112_REAL_.1f",
     "solarRunningStatus": "__R8191.4_BOOL_i",
     "solarPumpPower": "__R6682_SINT_d",
+
+    "solarConsumer1ServiceEnabled": "__R19337.4_BOOL_i",
+    "solarConsumer1State": "__R19337.1_BOOL_i",
     "solarConsumer1Temperature": "__R4194_REAL_.1f",
     "solarConsumer1MaximumTemperature": "__R19397_USINT_u",
     "solarConsumer1Demand": "__R19396_USINT_u",
     "solarConsumer1Heating": "__R4209.0_BOOL_i",
-    "solarConsumer1ServiceEnabled": "__R19337.4_BOOL_i",
-    "solarConsumer2Temperature": "__R19399_USINT_u",
-    "solarConsumer2MaximumTemperature": "__R19398_USINT_u",
-    "solarConsumer2Demand": "__R4198_REAL_.1f",
-    "solarConsumer2Heating": "__R4209.1_BOOL_i",
+
     "solarConsumer2ServiceEnabled": "__R19337.5_BOOL_i",
-    "solarConsumer3Temperature": "__R19401_USINT_u",
-    "solarConsumer3MaximumTemperature": "__R19400_USINT_u",
-    "solarConsumer3Demand": "__R4202_REAL_.1f",
+    "solarConsumer2State": "__R19337.2_BOOL_i",
+    "solarConsumer2Temperature": "__R4198_REAL_.1f",
+    "solarConsumer2MaximumTemperature": "__R19399_USINT_u",
+    "solarConsumer2Demand": "__R19398_USINT_u",
+    "solarConsumer2Heating": "__R4209.1_BOOL_i",
+
+    "solarConsumer3ServiceEnabled": "__R19337.6_BOOL_i",
+    "solarConsumer3State": "__R19337.3_BOOL_i",
+    "solarConsumer3Temperature": "__R4202_REAL_.1f",
+    "solarConsumer3MaximumTemperature": "__R19401_USINT_u",
+    "solarConsumer3Demand": "__R19400_USINT_u",
     "solarConsumer3Heating": "__R4209.2_BOOL_i",
-    "solarConsumer3ServiceEnabled": "__R19337.2_BOOL_i",
 
     # heat pump / ZD_T.XML
+    "hpRunningStatus": "__R29512.0_BOOL_i",
+    "hpCompressorSpeed": "__R29712_INT_-5.1d",
+    "hpState": "__R29799.0_BOOL_i",
+    "hpServiceEnabled": "__R29799.2_BOOL_i",
+    "hpStatus": "__R26948_STRING[20]_s",
     "hpRunningTime": "__R30079_TIME_Thh:mm:ss",
     "hpIdleTime": "__R30091_TIME_Thh:mm:ss",
 
@@ -72,22 +83,19 @@ REGISTRY_MAPPER = {
     "hotWaterYesterdayMinutes": "__R30051_UINT_u",
     "hotWaterYesterdayStarts": "__R30070_USINT_u",
 
-    "hpRunningStatus": "__R29512.0_BOOL_i",
-    "hpCompressorSpeed": "__R29712_INT_-5.1d",
-    "hpStatusText": "__R26948_STRING[20]_s",
-    "hpOutletTemperature": "__R29480_INT_-5.1d",
-    "hpInletTemperature": "__R29476_INT_-5.1d",
-
     # home
     "zone1SummerMode": "__R16701.0_BOOL_i",
     "zone2SummerMode": "__R20015.0_BOOL_i",
 
     # water / dashboard + TV_TC
     "waterState": "__R25144.0_BOOL_i",
+    "waterServiceEnabled": "__R25144.1_BOOL_i",
     "waterSwitchingSensorTemperature": "__R4120_REAL_.1f",
     "waterRequiredTemperature": "__R4298_INT_d",
-    "waterComfortTemperature": "__R4298_INT_d",
-    "waterSetbackTemperature": "__R25169_SINT_d",
+    # "waterComfortTemperature": "__R4298_INT_d",
+    # "waterSetbackTemperature": "__R25169_SINT_d",
+    "waterSetTemperature": "__R25165_REAL_.0f",
+    "waterDecreasedSetbackTemperature": "__R25169_SINT_d",
     "waterOneTimeHeatingTemperature": "__R25183_SINT_d",
     "waterOneTimeHeatingState": "__R25184.0_BOOL_i",
 
@@ -102,9 +110,9 @@ REGISTRY_MAPPER = {
     "zone2DesiredTemperature": "__R4250_REAL_.1f",
     
     # aku
-    "akuState": "__R8220.1_BOOL_i",
-    "akuComfortTemperature": "__R4298_INT_d",
-    "akuSetbackTemperature": "__R25169_SINT_d",
+    "akuState": "__R19862.0_BOOL_i",
+    "akuComfortTemperature": "__R19863_SINT_d",
+    "akuSetbackTemperature": "__R19866_SINT_d",
 
     # source1 / dashboard
     "source1HeatingDemandTemperature": "__R8181_REAL_.0f",
