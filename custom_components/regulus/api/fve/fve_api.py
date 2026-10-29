@@ -58,10 +58,7 @@ class FveApi(AbstractApi[FveResponseSchema]):
     page = "/zd_f_sch.xml"
     key = "fve"
     name = "FVE"
-
-    @classmethod
-    def is_api_supported(cls, ir_version: str) -> bool:
-        return "fveGridPowerTotal" in REGISTRY_MAPPERS.get(ir_version, {})
+    supported_ir_versions = ["14_1_0_10_107"]
 
     def generate_response(self, schema_xml_map: Dict[str, str], registry_mapper: Dict[str, str]) -> FveResponseSchema:
         imported, exported, flow_error = grid_flow(schema_xml_map, registry_mapper)

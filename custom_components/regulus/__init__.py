@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from custom_components.regulus import api
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.const import Platform
@@ -13,6 +14,7 @@ from .api.water.water_api import WaterApi
 from .api.zone1.zone1_api import Zone1Api
 from .api.aku.aku_api import AkuApi
 from .api.zone2.zone2_api import Zone2Api
+from .api.source2.source2_api import Source2Api
 from .api.fve.fve_api import FveApi
 from .api.solar.solar_api import SolarApi
 from .const import DOMAIN
@@ -37,6 +39,7 @@ API_CLASSES = [
     WaterApi,
     Zone1Api,
     Zone2Api,
+    Source2Api,
     FveApi,
     SolarApi,
 ]
@@ -65,8 +68,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         if not entry.options.get(option_key, True):
             _LOGGER.debug("%s API disabled", api.key)
             continue
-        
-        if not api.is_api_supported(config["ir_version"]):
+
+        supported_versions = getattr(api, "supported_ir_versions", None)        
+        if supported_versions and config["ir_version"] not in supported_versions:
             _LOGGER.debug("%s API not supported by IR version %s", api.key, config["ir_version"])
             continue
             
