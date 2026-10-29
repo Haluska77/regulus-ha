@@ -4,21 +4,24 @@ from ..schema import DeviceSchema
 
 
 class SolarResponseSchema(BaseModel):
-    solarPumpPower: DeviceSchema
-    solarStatus: DeviceSchema
-    solarPanelTemperature: DeviceSchema
-    solarConsumer1Heating: DeviceSchema
-    solarConsumer1Enabled: DeviceSchema
-    solarConsumer1Temperature: DeviceSchema
-    solarConsumer1Demand: DeviceSchema
-    solarConsumer1MaximumTemperature: DeviceSchema
-    solarConsumer2Heating: DeviceSchema
-    solarConsumer2Enabled: DeviceSchema
-    solarConsumer2Temperature: DeviceSchema
-    solarConsumer2Demand: DeviceSchema
-    solarConsumer2MaximumTemperature: DeviceSchema
-    solarConsumer3Heating: DeviceSchema
-    solarConsumer3Enabled: DeviceSchema
-    solarConsumer3Temperature: DeviceSchema
-    solarConsumer3Demand: DeviceSchema
-    solarConsumer3MaximumTemperature: DeviceSchema
+    pumpPower: DeviceSchema
+    status: DeviceSchema
+    panelTemperature: DeviceSchema
+    consumer1state: DeviceSchema
+    consumer1Heating: DeviceSchema
+    consumer1Enabled: DeviceSchema
+    consumer1Temperature: DeviceSchema
+    consumer1Demand: DeviceSchema
+    consumer1MaximumTemperature: DeviceSchema
+    consumer2state: DeviceSchema
+    consumer2Heating: DeviceSchema
+    consumer2Enabled: DeviceSchema
+    consumer2Temperature: DeviceSchema
+    consumer2Demand: DeviceSchema
+    consumer2MaximumTemperature: DeviceSchema
+    consumer3state: DeviceSchema
+    consumer3Heating: DeviceSchema
+    consumer3Enabled: DeviceSchema
+    consumer3Temperature: DeviceSchema
+    consumer3Demand: DeviceSchema
+    consumer3MaximumTemperature: DeviceSchema

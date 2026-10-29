@@ -3,6 +3,6 @@ from pydantic import BaseModel
 from ..schema import DeviceSchema
 
 class AkuResponseSchema(BaseModel):
-    akuState: DeviceSchema
-    akuComfortTemperature: DeviceSchema
-    akuSetbackTemperature: DeviceSchema
+    state: DeviceSchema
+    comfortTemperature: DeviceSchema
+    setbackTemperature: DeviceSchema
