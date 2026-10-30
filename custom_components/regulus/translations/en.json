@@ -29,6 +29,7 @@
           "enable_zone2": "Enable Zone 2",
           "enable_aku": "Enable AKU",
           "enable_solar": "Enable Solar",
+          "enable_source2": "Enable Source 2",
           "enable_fve": "Enable FVE (grid wattmeter, electric heater)"
         }
       }
