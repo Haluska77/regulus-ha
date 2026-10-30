@@ -36,9 +36,16 @@ class HeatPumpOptionsFlow(config_entries.OptionsFlow):
             
         schema = {}
         schema[vol.Required("ir_version", default=ir_version)] = selector({"select": {"options": IR_VERSION_OPTIONS}})
-        schema[vol.Required("polling_interval", default=config_entry.options.get("polling_interval", config_entry.data.get("polling_interval", POLLING_INTERVAL)))] = vol.All(vol.Coerce(int), vol.Range(min=1))
+        schema[vol.Required("polling_interval", default=config_entry.options.get("polling_interval", 
+                config_entry.data.get("polling_interval", POLLING_INTERVAL)))] = vol.All(vol.Coerce(int), vol.Range(min=1))
+
         for api in API_CLASSES:
             option_key = f"enable_{api.key}"
+            
+            supported_versions = getattr(api, "supported_ir_versions", None)        
+            if supported_versions and ir_version not in supported_versions:
+                continue
+            
             schema[vol.Required(option_key, default=config_entry.options.get(option_key, True))] = bool
             
         return self.async_show_form(
