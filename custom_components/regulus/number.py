@@ -51,9 +51,6 @@ class DynamicNumber(DynamicBase, NumberEntity):
     @property
     def should_poll(self):
         return False
-
-    async def async_added_to_hass(self):
-        self._coordinator.async_add_listener(self.async_write_ha_state)
         
     async def async_set_native_value(self, value: float) -> None:
         body = {self._registry_key: value}

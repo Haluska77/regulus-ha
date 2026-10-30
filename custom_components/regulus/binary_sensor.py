@@ -38,6 +38,3 @@ class DynamicSensor(DynamicBase, BinarySensorEntity):
     @property
     def should_poll(self):
         return False
-
-    async def async_added_to_hass(self):
-        self._coordinator.async_add_listener(self.async_write_ha_state)

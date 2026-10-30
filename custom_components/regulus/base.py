@@ -26,3 +26,6 @@ class DynamicBase(CoordinatorEntity):
 
         self._registry_key = sensor_data.get("registryKey")
         self._error = sensor_data.get("error")
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
