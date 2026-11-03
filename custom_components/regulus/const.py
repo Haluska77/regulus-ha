@@ -9,7 +9,6 @@ from .mapper.registry_mapper_ir14_1_0_11_16 import REGISTRY_MAPPER as ir14_1_0_1
 from .mapper.registry_mapper_ir14_1_0_10_107 import REGISTRY_MAPPER as ir14_1_0_10_107
 
 DOMAIN = "regulus"
-NAME = "Regulus Heat Pump"
 COMPANY = "Regulus"
 IR_VERSION_OPTIONS = ["12_04_10", "14_1_0_5_0", "14_1_0_6_0", "14_1_0_7_0", "14_1_0_10_0", "14_1_0_10_107", "14_1_0_11_0", "14_1_0_11_4", "14_1_0_11_16"]
 POLLING_INTERVAL = 5
