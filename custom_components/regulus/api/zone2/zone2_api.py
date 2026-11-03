@@ -18,6 +18,8 @@ class Zone2Api(AbstractApi[Zone2ResponseSchema]):
         return Zone2ResponseSchema(
             state = deviceSensor("State", "zone2State", "", BinarySensorDeviceClass.RUNNING, "mdi:power",
                                       Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda v: v != "0"),
+            serviceEnabled = deviceSensor("Service Enabled", "zone2ServiceEnabled", "", "none", "mdi:check-circle", 
+                                            Platform.SWITCH, schema_xml_map, registry_mapper, converter=lambda value: value != "0"),
             temperature = deviceSensor("Temperature", "zone2Temperature", "°C", SensorDeviceClass.TEMPERATURE, "mdi:thermometer", 
                                         Platform.SENSOR, schema_xml_map, registry_mapper),
             desiredTemperature = deviceSensor("Desired Temperature", "zone2DesiredTemperature", "°C", NumberDeviceClass.TEMPERATURE, "mdi:thermometer", 

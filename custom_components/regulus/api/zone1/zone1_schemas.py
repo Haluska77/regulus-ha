@@ -4,6 +4,7 @@ from ..schema import DeviceSchema
 
 class Zone1ResponseSchema(BaseModel):
     state: DeviceSchema
+    serviceEnabled: DeviceSchema
     temperature: DeviceSchema
     desiredTemperature: DeviceSchema
     humidity: DeviceSchema

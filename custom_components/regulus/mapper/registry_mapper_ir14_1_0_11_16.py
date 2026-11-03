@@ -20,12 +20,12 @@ REGISTRY_MAPPER = {
     "zone2HeatingWaterTemperature": "__R4124_REAL_.1f",
     "zone2RequiredHeatingWaterTemperature": "__R4226_REAL_.1f",
 
-    "waterRunningStatusFromHeatPump": "__R8230.1_BOOL_i",
+    "waterRunningStatusFromHeatPump": "__R10206.6_BOOL_i",
 
     "akuTopTemperature": "__R4068_REAL_.1f",
     "akuBottomTemperature": "__R4182_REAL_.1f",
     "akuRequiredTemperature": "__R4210_REAL_.1f",
-    "akuRunningStatusFromHeatPump": "__R8220.1_BOOL_i",
+    "akuRunningStatusFromHeatPump": "__R133265.0_BOOL_i",
 
     "solarPanelTemperature": "__R4112_REAL_.1f",
     "solarRunningStatus": "__R8191.4_BOOL_i",
@@ -98,12 +98,14 @@ REGISTRY_MAPPER = {
     "waterOneTimeHeatingState": "__R25184.0_BOOL_i",
 
     # zone1 / ZO_Z1.XML + schema
-    "zone1State": "__R16592.1_BOOL_i",
+    "zone1State": "__R16592.0_BOOL_i",
+    "zone1ServiceEnabled": "__R16592.1_BOOL_i",
     "zone1Temperature": "__R111174_REAL_.1f",
     "zone1DesiredTemperature": "__R4246_REAL_.1f",
 
     # zone2 / ZO_Z2.XML + schema
-    "zone2State": "__R19906.1_BOOL_i",
+    "zone2State": "__R19906.0_BOOL_i",
+    "zone2ServiceEnabled": "__R19906.1_BOOL_i",
     "zone2Temperature": "__R111196_REAL_.1f",
     "zone2DesiredTemperature": "__R4250_REAL_.1f",
     
