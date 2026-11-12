@@ -2,7 +2,9 @@ from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, Any, Dict
 from urllib.parse import urlencode
 from .session_factory import SessionFactory
-from .login_service import LoginService
+from .login_service import LoginService, REQUEST_TIMEOUT
+
+MAX_LOGIN_ATTEMPTS = 3
 from .xml_parser_service import parse_xml_to_map
 from ..const import REGISTRY_MAPPERS
 
@@ -25,7 +27,7 @@ class AbstractApi(Generic[T], ABC):
     def fetch(self) -> Any:
         api_url = f"{self.url}{self.page}"
         try:
-            return self.execute(lambda: self.session.get(api_url, allow_redirects=False))
+            return self.execute(lambda: self.session.get(api_url, allow_redirects=False, timeout=REQUEST_TIMEOUT))
         except Exception as e:
             raise ValueError(f"Failed to fetch {api_url}: {e!r}") from e
     
@@ -41,7 +43,8 @@ class AbstractApi(Generic[T], ABC):
                     api_url,
                     data=body_obj,
                     headers={"Content-Type": "application/x-www-form-urlencoded"},
-                    allow_redirects=False
+                    allow_redirects=False,
+                    timeout=REQUEST_TIMEOUT
                 )
                 resp.raise_for_status()
                 return resp
@@ -63,13 +66,16 @@ class AbstractApi(Generic[T], ABC):
         return urlencode(encoded_body)
     
     def execute(self, operation) -> Any:
-        while True:
+        # Bounded: an unrecognised login redirect must not spin forever.
+        for _ in range(MAX_LOGIN_ATTEMPTS):
             response = operation()
             if response.status_code == 200:
                 return self.get_response(response.text)
 
             login_service = LoginService(self.config)
             login_service.success_login(response)
+        raise ValueError(f"Login failed after {MAX_LOGIN_ATTEMPTS} attempts, "
+                         f"last status {response.status_code}, Location: {response.headers.get('Location')}")
 
     def get_response(self, data: str) -> Any:
         try:

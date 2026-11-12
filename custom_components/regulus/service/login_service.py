@@ -1,20 +1,39 @@
 import requests
 from typing import Dict
+from urllib.parse import urlparse
 from .session_factory import SessionFactory
 from .xml_parser_service import parse_acer_value
+
+# The controller is slow but must never block an executor thread forever.
+REQUEST_TIMEOUT = 10
+
+
+def is_login_redirect(url: str) -> bool:
+    """Firmwares redirect unauthenticated requests either to /LOGIN.XML or,
+    like IR14 1.0.11.30, to an absolute http://<host>/LOGIN.HTM."""
+    path = urlparse(url).path.upper()
+    return path.endswith("/LOGIN.XML") or path.endswith("/LOGIN.HTM")
+
 
 class LoginService:
 
     def __init__(self, config: dict):
-        self.url = f"http://{config["host"]}/login.xml"
+        self.host = config["host"]
+        self.url = f"http://{self.host}/login.xml"
         self.user = config["user"]
         self.password = config["password"]
         self.session = SessionFactory.get_session()
 
-    def get_login(self) -> requests.Response:
-        return self.session.get(self.url)
+    def login_url_for(self, redirect_url: str) -> str:
+        # LOGIN.HTM is a JS page; its form posts to the TECO system endpoint.
+        if urlparse(redirect_url).path.upper().endswith("/LOGIN.HTM"):
+            return f"http://{self.host}/syswww/LOGIN.XML"
+        return self.url
 
-    def post_login(self) -> requests.Response:
+    def get_login(self) -> requests.Response:
+        return self.session.get(self.url, timeout=REQUEST_TIMEOUT)
+
+    def post_login(self, url: str = None) -> requests.Response:
 
         login_data: Dict[str, str] = {
             "USER": self.user,
@@ -25,15 +44,16 @@ class LoginService:
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        return self.session.post(self.url, data=login_data, headers=headers, allow_redirects=False)
+        return self.session.post(url or self.url, data=login_data, headers=headers,
+                                 allow_redirects=False, timeout=REQUEST_TIMEOUT)
 
     def success_login(self, response: requests.Response) -> str:
         login_status = response.status_code
         redirect_url = response.headers.get("Location", "")
         count = 1
 
-        while count < 10 and login_status == 302 and redirect_url.upper() == "/LOGIN.XML":
-            login_response = self.post_login()
+        while count < 10 and login_status == 302 and is_login_redirect(redirect_url):
+            login_response = self.post_login(self.login_url_for(redirect_url))
             login_status = login_response.status_code
 
             if login_status == 200 and login_response.text:
