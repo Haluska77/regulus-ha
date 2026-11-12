@@ -19,6 +19,7 @@ Integration provides sensors (sensor and binary_sensor) and controls (number and
 - 1.0.11.0 (thanks to [@petrmac](https://github.com/petrmac))
 - 1.0.11.4 (thanks to [@cwm77](https://github.com/cwm77))
 - 1.0.11.16 (thanks to [@grecoit](https://github.com/grecoit), [@jkremlacek](https://github.com/jkremlacek))
+- 1.0.11.30
 
 Any other versions are welcome by PR.
 

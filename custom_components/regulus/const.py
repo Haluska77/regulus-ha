@@ -7,10 +7,11 @@ from .mapper.registry_mapper_ir14_1_0_11_0 import REGISTRY_MAPPER as ir14_1_0_11
 from .mapper.registry_mapper_ir14_1_0_11_4 import REGISTRY_MAPPER as ir14_1_0_11_4
 from .mapper.registry_mapper_ir14_1_0_11_16 import REGISTRY_MAPPER as ir14_1_0_11_16
 from .mapper.registry_mapper_ir14_1_0_10_107 import REGISTRY_MAPPER as ir14_1_0_10_107
+from .mapper.registry_mapper_ir14_1_0_11_30 import REGISTRY_MAPPER as ir14_1_0_11_30
 
 DOMAIN = "regulus"
 COMPANY = "Regulus"
-IR_VERSION_OPTIONS = ["12_04_10", "14_1_0_5_0", "14_1_0_6_0", "14_1_0_7_0", "14_1_0_10_0", "14_1_0_10_107", "14_1_0_11_0", "14_1_0_11_4", "14_1_0_11_16"]
+IR_VERSION_OPTIONS = ["12_04_10", "14_1_0_5_0", "14_1_0_6_0", "14_1_0_7_0", "14_1_0_10_0", "14_1_0_10_107", "14_1_0_11_0", "14_1_0_11_4", "14_1_0_11_16", "14_1_0_11_30"]
 POLLING_INTERVAL = 5
 REGISTRY_MAPPERS = {
     "12_04_10": ir12_04_10,
@@ -22,4 +23,5 @@ REGISTRY_MAPPERS = {
     "14_1_0_11_0": ir14_1_0_11_0,
     "14_1_0_11_4": ir14_1_0_11_4,
     "14_1_0_11_16": ir14_1_0_11_16,
+    "14_1_0_11_30": ir14_1_0_11_30,
 }
